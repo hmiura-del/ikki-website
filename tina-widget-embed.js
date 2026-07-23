@@ -20,8 +20,7 @@
     tab.setAttribute("aria-label", "AI秘書ティナと話す");
     tab.style.cssText = [
         "position:fixed",
-        "top:50%",
-        "transform:translateY(-50%)",
+        "top:110px", // サイト側の「無料相談」固定ボタンと被らないよう、上部に配置
         "right:0",
         "z-index:2000",
         "display:flex",
@@ -91,6 +90,10 @@
         panel.style.transform = open ? "translateX(0)" : "translateX(100%)";
         tab.style.right = open ? PANEL_WIDTH + "px" : "0";
         document.getElementById("tina-tab-arrow").textContent = open ? "›" : "‹";
+
+        // ページ本体をパネルの幅だけ左に押し出し、コンテンツと重ならないようにする
+        document.body.style.transition = "margin-right 0.3s ease";
+        document.body.style.marginRight = open ? PANEL_WIDTH + "px" : "0";
     }
 
     // 最初からパネルを開いた状態で表示する
