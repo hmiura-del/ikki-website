@@ -23,7 +23,7 @@
         "top:50%",
         "transform:translateY(-50%)",
         "right:0",
-        "z-index:2147483000",
+        "z-index:2000",
         "display:flex",
         "flex-direction:column",
         "align-items:center",
@@ -38,7 +38,7 @@
         "background:" + BRAND_GRADIENT,
     ].join(";");
     tab.innerHTML =
-        '<span style="writing-mode:vertical-rl;font-size:12px;font-weight:bold;">AI秘書 ティナ</span>' +
+        '<span style="writing-mode:vertical-rl;text-orientation:upright;letter-spacing:2px;font-size:12px;font-weight:bold;">AI秘書 ティナ</span>' +
         '<span id="tina-tab-arrow" style="font-size:18px;line-height:1;">‹</span>';
 
     // ---- スライドパネル(iframeを内包) ----
@@ -50,7 +50,7 @@
         "height:100%",
         "width:" + PANEL_WIDTH + "px",
         "max-width:calc(100vw - 40px)",
-        "z-index:2147482999",
+        "z-index:1999",
         "box-shadow:-4px 0 24px rgba(0,0,0,0.3)",
         "transform:translateX(100%)",
         "transition:transform 0.3s ease",
@@ -92,6 +92,9 @@
         tab.style.right = open ? PANEL_WIDTH + "px" : "0";
         document.getElementById("tina-tab-arrow").textContent = open ? "›" : "‹";
     }
+
+    // 最初からパネルを開いた状態で表示する
+    setOpen(true);
 
     tab.addEventListener("click", function () {
         setOpen(!isOpen);
