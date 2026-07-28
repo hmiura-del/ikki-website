@@ -106,19 +106,39 @@
         setOpen(false);
     });
 
+    // ---- 訪問者ID(第一者Cookie/localStorage、複数回の訪問をまたいで同一人物として扱う) ----
+    function getOrCreateVisitorId() {
+        var STORAGE_KEY = "tina_visitor_id";
+        try {
+            var existing = window.localStorage.getItem(STORAGE_KEY);
+            if (existing) return existing;
+            var fresh =
+                (window.crypto && window.crypto.randomUUID
+                    ? window.crypto.randomUUID()
+                    : "v-" + Date.now() + "-" + Math.random().toString(36).slice(2));
+            window.localStorage.setItem(STORAGE_KEY, fresh);
+            return fresh;
+        } catch (e) {
+            // localStorageが使えない場合はセッション限りのIDにフォールバック
+            return "v-" + Date.now() + "-" + Math.random().toString(36).slice(2);
+        }
+    }
+    var visitorId = getOrCreateVisitorId();
+
     // ---- iframe(ティナ)とのメッセージ連携 ----
     window.addEventListener("message", function (event) {
         var data = event.data;
         if (!data || data.source !== "tina-widget") return;
 
         if (data.type === "requestPageInfo") {
-            // 今、訪問者が実際に見ているページの情報を返す
+            // 今、訪問者が実際に見ているページの情報+訪問者IDを返す
             iframe.contentWindow.postMessage(
                 {
                     source: "tina-widget-host",
                     type: "pageInfo",
                     title: document.title,
                     url: window.location.href,
+                    visitorId: visitorId,
                 },
                 "*"
             );
