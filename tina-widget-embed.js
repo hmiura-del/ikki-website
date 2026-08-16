@@ -1,109 +1,120 @@
 /**
  * ティナ ウィジェット 埋め込みスクリプト(静的HTMLサイト向け)
+ * 右下固定の小さなカード型(Salesforce Piperのようなスタイル)
  *
  * 使い方: 各ページの </body> 直前に以下を追加するだけ
  *   <script src="./tina-widget-embed.js"></script>
- *
- * 中身は iframe で、別途デプロイした会話AIアプリ(Next.js/create-simli-app-elevenlabs)
- * を読み込んでいます。ページ側のコードはこのファイル1つだけで完結します。
  */
 (function () {
     var TINA_APP_URL = "https://ikki-tina-agent.netlify.app";
 
     var BRAND_GRADIENT = "linear-gradient(135deg, #1A2A45 0%, #1158A6 100%)";
-    var PANEL_WIDTH = 380; // px
+    var CARD_WIDTH = 320; // px
+    var CARD_HEIGHT = 460; // px(顔+ボタン+入力欄+注意書きがすべて収まる高さ)
 
-    var isOpen = false;
+    var isMinimized = false;
 
-    // ---- 常時表示のタブ ----
-    var tab = document.createElement("button");
-    tab.setAttribute("aria-label", "AI秘書ティナと話す");
-    tab.style.cssText = [
+    // ---- カード本体(常時、顔が見えている状態) ----
+    var card = document.createElement("div");
+    card.style.cssText = [
         "position:fixed",
-        "top:110px", // サイト側の「無料相談」固定ボタンと被らないよう、上部に配置
-        "right:0",
+        "bottom:20px",
+        "right:20px",
         "z-index:2000",
-        "display:flex",
-        "flex-direction:column",
-        "align-items:center",
-        "gap:8px",
-        "padding:16px 8px",
-        "border:none",
-        "border-radius:12px 0 0 12px",
-        "box-shadow:0 4px 16px rgba(0,0,0,0.25)",
-        "color:#fff",
-        "cursor:pointer",
-        "transition:right 0.3s ease",
-        "background:" + BRAND_GRADIENT,
-    ].join(";");
-    tab.innerHTML =
-        '<span style="writing-mode:vertical-rl;text-orientation:upright;letter-spacing:2px;font-size:12px;font-weight:bold;">AI秘書 ティナ</span>' +
-        '<span id="tina-tab-arrow" style="font-size:18px;line-height:1;">‹</span>';
-
-    // ---- スライドパネル(iframeを内包) ----
-    var panel = document.createElement("div");
-    panel.style.cssText = [
-        "position:fixed",
-        "top:0",
-        "right:0",
-        "height:100%",
-        "width:" + PANEL_WIDTH + "px",
-        "max-width:calc(100vw - 40px)",
-        "z-index:1999",
-        "box-shadow:-4px 0 24px rgba(0,0,0,0.3)",
-        "transform:translateX(100%)",
-        "transition:transform 0.3s ease",
+        "width:" + CARD_WIDTH + "px",
+        "height:" + CARD_HEIGHT + "px",
+        "max-width:calc(100vw - 24px)",
+        "border-radius:16px",
+        "overflow:hidden",
+        "box-shadow:0 8px 28px rgba(0,0,0,0.28)",
         "background:#0d1526",
+        "transition:transform 0.25s ease, opacity 0.25s ease",
+        "transform-origin:bottom right",
     ].join(";");
-
-    var panelHeader = document.createElement("div");
-    panelHeader.style.cssText = [
-        "display:flex",
-        "align-items:center",
-        "justify-content:space-between",
-        "padding:12px 16px",
-        "background:" + BRAND_GRADIENT,
-    ].join(";");
-    panelHeader.innerHTML =
-        '<span style="color:#fff;font-weight:bold;font-size:14px;">AI秘書 ティナ</span>';
-
-    var closeBtn = document.createElement("button");
-    closeBtn.setAttribute("aria-label", "閉じる");
-    closeBtn.textContent = "×";
-    closeBtn.style.cssText =
-        "background:none;border:none;color:rgba(255,255,255,0.8);font-size:20px;line-height:1;cursor:pointer;";
-    panelHeader.appendChild(closeBtn);
 
     var iframe = document.createElement("iframe");
     iframe.src = TINA_APP_URL;
     iframe.setAttribute("allow", "microphone; autoplay");
-    iframe.style.cssText = "width:100%;height:calc(100% - 48px);border:none;";
+    iframe.style.cssText = "width:100%;height:100%;border:none;";
+    card.appendChild(iframe);
 
-    panel.appendChild(panelHeader);
-    panel.appendChild(iframe);
+    // ---- 折りたたみ用の小さいボタン(最小化時に表示) ----
+    var minimizedButton = document.createElement("button");
+    minimizedButton.setAttribute("aria-label", "AI秘書ティナを開く");
+    minimizedButton.style.cssText = [
+        "position:fixed",
+        "bottom:20px",
+        "right:20px",
+        "z-index:2000",
+        "width:64px",
+        "height:64px",
+        "border-radius:50%",
+        "border:none",
+        "cursor:pointer",
+        "box-shadow:0 6px 20px rgba(0,0,0,0.3)",
+        "background:" + BRAND_GRADIENT,
+        "color:#fff",
+        "font-size:11px",
+        "font-weight:bold",
+        "display:none",
+        "align-items:center",
+        "justify-content:center",
+        "text-align:center",
+        "line-height:1.3",
+        "transition:transform 0.15s ease",
+    ].join(";");
+    minimizedButton.textContent = "ティナ";
+    minimizedButton.addEventListener("mouseenter", function () {
+        minimizedButton.style.transform = "scale(1.06)";
+    });
+    minimizedButton.addEventListener("mouseleave", function () {
+        minimizedButton.style.transform = "scale(1)";
+    });
 
-    document.body.appendChild(tab);
-    document.body.appendChild(panel);
+    // ---- カード右上の折りたたみボタン ----
+    var collapseBtn = document.createElement("button");
+    collapseBtn.setAttribute("aria-label", "たたむ");
+    collapseBtn.textContent = "\u2013"; // minus sign
+    collapseBtn.style.cssText = [
+        "position:absolute",
+        "top:8px",
+        "right:8px",
+        "z-index:2001",
+        "width:26px",
+        "height:26px",
+        "border-radius:50%",
+        "border:none",
+        "cursor:pointer",
+        "background:rgba(0,0,0,0.35)",
+        "color:#fff",
+        "font-size:16px",
+        "line-height:1",
+        "display:flex",
+        "align-items:center",
+        "justify-content:center",
+    ].join(";");
+    card.style.position = "fixed"; // ensure relative positioning context works with absolute child
+    var cardWrapper = document.createElement("div");
+    cardWrapper.style.cssText = "position:relative;width:100%;height:100%;";
+    cardWrapper.appendChild(iframe);
+    cardWrapper.appendChild(collapseBtn);
+    card.innerHTML = "";
+    card.appendChild(cardWrapper);
 
-    function setOpen(open) {
-        isOpen = open;
-        panel.style.transform = open ? "translateX(0)" : "translateX(100%)";
-        tab.style.right = open ? PANEL_WIDTH + "px" : "0";
-        document.getElementById("tina-tab-arrow").textContent = open ? "›" : "‹";
+    document.body.appendChild(card);
+    document.body.appendChild(minimizedButton);
 
-        // ページ本体をパネルの幅だけ左に押し出し、コンテンツと重ならないようにする
-        document.body.style.transition = "margin-right 0.3s ease";
-        document.body.style.marginRight = open ? PANEL_WIDTH + "px" : "0";
+    function setMinimized(min) {
+        isMinimized = min;
+        card.style.display = min ? "none" : "block";
+        minimizedButton.style.display = min ? "flex" : "none";
     }
 
-    // 最初からパネルを開いた状態で表示する
-    setOpen(true);
-
-    tab.addEventListener("click", function () {
-        setOpen(!isOpen);
+    collapseBtn.addEventListener("click", function () {
+        setMinimized(true);
     });
-    closeBtn.addEventListener("click", function () {
-        setOpen(false);
+    minimizedButton.addEventListener("click", function () {
+        setMinimized(false);
     });
 
     // ---- 訪問者ID(第一者Cookie/localStorage、複数回の訪問をまたいで同一人物として扱う) ----
@@ -119,7 +130,6 @@
             window.localStorage.setItem(STORAGE_KEY, fresh);
             return fresh;
         } catch (e) {
-            // localStorageが使えない場合はセッション限りのIDにフォールバック
             return "v-" + Date.now() + "-" + Math.random().toString(36).slice(2);
         }
     }
@@ -131,7 +141,6 @@
         if (!data || data.source !== "tina-widget") return;
 
         if (data.type === "requestPageInfo") {
-            // 今、訪問者が実際に見ているページの情報+訪問者IDを返す
             iframe.contentWindow.postMessage(
                 {
                     source: "tina-widget-host",
@@ -154,10 +163,8 @@
                     target.hash.length > 0;
 
                 if (isSamePageAnchor) {
-                    // 同じページ内のアンカー: そのまま移動(このページ自体は再読み込みされない)
                     window.location.hash = target.hash;
                 } else {
-                    // 別ページ: 新しいタブで開く(会話中のこのページはそのまま)
                     window.open(data.url, "_blank", "noopener,noreferrer");
                 }
             } catch (e) {
