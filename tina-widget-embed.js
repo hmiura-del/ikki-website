@@ -1,20 +1,12 @@
-/**
- * ティナ ウィジェット 埋め込みスクリプト(静的HTMLサイト向け)
- * 右下固定の小さなカード型(Salesforce Piperのようなスタイル)
- *
- * 使い方: 各ページの </body> 直前に以下を追加するだけ
- *   <script src="./tina-widget-embed.js"></script>
- */
 (function () {
     var TINA_APP_URL = "https://ikki-tina-agent.netlify.app";
 
     var BRAND_GRADIENT = "linear-gradient(135deg, #1A2A45 0%, #1158A6 100%)";
-    var CARD_WIDTH = 320; // px
-    var CARD_HEIGHT = 460; // px(顔+ボタン+入力欄+注意書きがすべて収まる高さ)
+    var CARD_WIDTH = 320;
+    var CARD_HEIGHT = 460;
 
     var isMinimized = false;
 
-    // ---- カード本体(常時、顔が見えている状態) ----
     var card = document.createElement("div");
     card.style.cssText = [
         "position:fixed",
@@ -36,34 +28,32 @@
     iframe.src = TINA_APP_URL;
     iframe.setAttribute("allow", "microphone; autoplay");
     iframe.style.cssText = "width:100%;height:100%;border:none;";
-    card.appendChild(iframe);
 
-    // ---- 折りたたみ用の小さいボタン(最小化時に表示) ----
     var minimizedButton = document.createElement("button");
-    minimizedButton.setAttribute("aria-label", "AI秘書ティナを開く");
+    minimizedButton.setAttribute("aria-label", "AI秘書ティナと会話する");
     minimizedButton.style.cssText = [
         "position:fixed",
         "bottom:20px",
         "right:20px",
         "z-index:2000",
-        "width:64px",
-        "height:64px",
-        "border-radius:50%",
+        "height:52px",
+        "padding:0 22px",
+        "border-radius:26px",
         "border:none",
         "cursor:pointer",
         "box-shadow:0 6px 20px rgba(0,0,0,0.3)",
         "background:" + BRAND_GRADIENT,
         "color:#fff",
-        "font-size:11px",
+        "font-size:14px",
         "font-weight:bold",
+        "white-space:nowrap",
         "display:none",
         "align-items:center",
         "justify-content:center",
-        "text-align:center",
-        "line-height:1.3",
+        "gap:8px",
         "transition:transform 0.15s ease",
     ].join(";");
-    minimizedButton.textContent = "ティナ";
+    minimizedButton.innerHTML = '<span style="font-size:16px;">\uD83D\uDCAC</span><span>AI秘書ティナと会話する</span>';
     minimizedButton.addEventListener("mouseenter", function () {
         minimizedButton.style.transform = "scale(1.06)";
     });
@@ -71,10 +61,9 @@
         minimizedButton.style.transform = "scale(1)";
     });
 
-    // ---- カード右上の折りたたみボタン ----
     var collapseBtn = document.createElement("button");
     collapseBtn.setAttribute("aria-label", "たたむ");
-    collapseBtn.textContent = "\u2013"; // minus sign
+    collapseBtn.textContent = "\u2013";
     collapseBtn.style.cssText = [
         "position:absolute",
         "top:8px",
@@ -93,12 +82,11 @@
         "align-items:center",
         "justify-content:center",
     ].join(";");
-    card.style.position = "fixed"; // ensure relative positioning context works with absolute child
+
     var cardWrapper = document.createElement("div");
     cardWrapper.style.cssText = "position:relative;width:100%;height:100%;";
     cardWrapper.appendChild(iframe);
     cardWrapper.appendChild(collapseBtn);
-    card.innerHTML = "";
     card.appendChild(cardWrapper);
 
     document.body.appendChild(card);
@@ -117,7 +105,6 @@
         setMinimized(false);
     });
 
-    // ---- 訪問者ID(第一者Cookie/localStorage、複数回の訪問をまたいで同一人物として扱う) ----
     function getOrCreateVisitorId() {
         var STORAGE_KEY = "tina_visitor_id";
         try {
@@ -135,7 +122,6 @@
     }
     var visitorId = getOrCreateVisitorId();
 
-    // ---- iframe(ティナ)とのメッセージ連携 ----
     window.addEventListener("message", function (event) {
         var data = event.data;
         if (!data || data.source !== "tina-widget") return;
