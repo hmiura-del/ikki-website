@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8Q4H7R12XG"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8Q4H7R12XG');</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -116,7 +118,7 @@
         <form onSubmit="{{ onGateSubmit }}" style="margin-top:28px;text-align:left;background:var(--alt);border:1px solid var(--line);border-radius:4px;padding:24px 26px">
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           <label style="font-size:12.5px;font-weight:700;color:var(--ink)">メールアドレス <span style="color:var(--accent)">*</span></label>
-          <input type="email" required name="email" placeholder="taro@example.com" style="margin-top:7px;width:100%;border:1px solid #ccd8e8;border-radius:3px;padding:11px 13px;font-size:14px;font-family:inherit">
+          <input type="email" required="{{ true }}" name="email" placeholder="taro@example.com" style="margin-top:7px;width:100%;border:1px solid #ccd8e8;border-radius:3px;padding:11px 13px;font-size:14px;font-family:inherit">
           <label style="display:block;margin-top:16px;font-size:12.5px;font-weight:700;color:var(--ink)">会社名（任意）</label>
           <input type="text" name="company" placeholder="株式会社〇〇" style="margin-top:7px;width:100%;border:1px solid #ccd8e8;border-radius:3px;padding:11px 13px;font-size:14px;font-family:inherit">
           <button type="submit" style="margin-top:20px;width:100%;border:none;cursor:pointer;font-size:14.5px;font-weight:700;color:#fff;background:var(--accent);padding:14px;border-radius:2px" style-hover="background:var(--accent-deep)">診断結果を見る</button>
