@@ -47,7 +47,7 @@
         "font-size:14px",
         "font-weight:bold",
         "white-space:nowrap",
-        "display:none",
+        "display:flex",
         "align-items:center",
         "justify-content:center",
         "gap:8px",
@@ -92,34 +92,25 @@
     document.body.appendChild(card);
     document.body.appendChild(minimizedButton);
 
+    // 最初はティナのカードを開いた状態、ボタンは隠す
+    setMinimized(false);
+
     function setMinimized(min) {
         isMinimized = min;
         card.style.display = min ? "none" : "block";
         minimizedButton.style.display = min ? "flex" : "none";
-        if (!min) {
-            // カードを開いた瞬間にiframeへフォーカスしておくことで、
-            // 「1回目のクリックがフォーカス合わせだけで終わる」問題を防ぐ
-            setTimeout(function () {
-                try {
-                    iframe.contentWindow.focus();
-                } catch (e) {}
-            }, 50);
-        }
     }
 
-    collapseBtn.addEventListener("click", function () {
+    // "click"だと、iframeにフォーカスが移る影響で1回目が反応しないことがあるため
+    // "mousedown"を使う(こちらはフォーカス移動の影響を受けにくい)
+    collapseBtn.addEventListener("mousedown", function (e) {
+        e.preventDefault();
         setMinimized(true);
     });
-    minimizedButton.addEventListener("click", function () {
+    minimizedButton.addEventListener("mousedown", function (e) {
+        e.preventDefault();
         setMinimized(false);
     });
-
-    // ページを開いた瞬間から、iframeにあらかじめフォーカスしておく
-    setTimeout(function () {
-        try {
-            iframe.contentWindow.focus();
-        } catch (e) {}
-    }, 300);
 
     function getOrCreateVisitorId() {
         var STORAGE_KEY = "tina_visitor_id";
