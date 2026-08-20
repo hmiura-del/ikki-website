@@ -65,14 +65,12 @@
     collapseBtn.setAttribute("aria-label", "たたむ");
     collapseBtn.textContent = "\u2013";
     collapseBtn.style.cssText = [
-        "position:fixed",
-        "bottom:" + (20 + CARD_HEIGHT - 44) + "px",
-        "right:28px",
-        "z-index:2100",
-        "width:34px",
-        "height:34px",
-        "pointer-events:auto",
-        "touch-action:manipulation",
+        "position:absolute",
+        "top:8px",
+        "right:8px",
+        "z-index:2001",
+        "width:26px",
+        "height:26px",
         "border-radius:50%",
         "border:none",
         "cursor:pointer",
@@ -88,28 +86,22 @@
     var cardWrapper = document.createElement("div");
     cardWrapper.style.cssText = "position:relative;width:100%;height:100%;";
     cardWrapper.appendChild(iframe);
+    cardWrapper.appendChild(collapseBtn);
     card.appendChild(cardWrapper);
 
     document.body.appendChild(card);
-    document.body.appendChild(collapseBtn);
     document.body.appendChild(minimizedButton);
 
     function setMinimized(min) {
         isMinimized = min;
         card.style.display = min ? "none" : "block";
-        collapseBtn.style.display = min ? "none" : "flex";
         minimizedButton.style.display = min ? "flex" : "none";
     }
 
-    // pointerdown を使うことで、iframe にフォーカスが移っている状態でも 1 クリックで反応する
-    collapseBtn.addEventListener("pointerdown", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    collapseBtn.addEventListener("click", function () {
         setMinimized(true);
     });
-    minimizedButton.addEventListener("pointerdown", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    minimizedButton.addEventListener("click", function () {
         setMinimized(false);
     });
 
@@ -133,11 +125,6 @@
     window.addEventListener("message", function (event) {
         var data = event.data;
         if (!data || data.source !== "tina-widget") return;
-
-        if (data.type === "minimize" || data.type === "collapse" || data.type === "close") {
-            setMinimized(true);
-            return;
-        }
 
         if (data.type === "requestPageInfo") {
             iframe.contentWindow.postMessage(
@@ -169,6 +156,10 @@
             } catch (e) {
                 // 不正なURLは無視
             }
+        }
+
+        if (data.type === "minimize") {
+            setMinimized(true);
         }
     });
 })();
