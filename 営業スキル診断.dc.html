@@ -48,7 +48,7 @@
       <div class="qcard">
         <p style="font-size:12px;letter-spacing:.24em;font-weight:700;color:var(--accent);text-transform:uppercase">Free Diagnosis</p>
         <h1 style="margin-top:16px;font-weight:900;font-size:clamp(28px,4.2vw,42px);letter-spacing:-.01em;line-height:1.35">あなたの営業組織は、<br>いま何レベルですか？</h1>
-        <p style="margin-top:18px;font-size:15px;color:var(--muted);line-height:2;max-width:620px">全21問・約5分。リード獲得からSalesforce活用、型化・仕組み化まで、7つの領域で営業組織の成熟度を診断します。結果は「Lv.1 これから」〜「Lv.4 仕組み化済み」の4段階で可視化されます。</p>
+        <p style="margin-top:18px;font-size:15px;color:var(--muted);line-height:2;max-width:620px">全21問・約5分。リード獲得からSFA・CRM活用、型化・仕組み化まで、7つの領域で営業組織の成熟度を診断します。結果は「Lv.1 これから」〜「Lv.4 仕組み化済み」の4段階で可視化されます。</p>
 
         <div style="margin-top:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px">
           <sc-for list="{{ domainSummaries }}" as="d" hint-placeholder-count="7">
@@ -160,23 +160,6 @@
           </div>
         </div>
 
-        <!-- whitepapers -->
-        <div style="margin-top:36px">
-          <p style="font-size:11px;letter-spacing:.2em;font-weight:700;color:var(--accent)">WHITEPAPER</p>
-          <h3 style="margin-top:10px;font-weight:800;font-size:18px">関連ホワイトペーパー</h3>
-          <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
-            <sc-for list="{{ whitepaperList }}" as="w" hint-placeholder-count="7">
-              <div style="border:1px solid var(--line);border-radius:4px;padding:15px 17px;display:flex;align-items:center;justify-content:space-between;gap:10px;{{ w.flagshipStyle }}">
-                <div style="display:flex;align-items:center;gap:10px">
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-                  <span style="font-size:13px;font-weight:700;line-height:1.5">{{ w.title }}</span>
-                </div>
-                <span style="flex-shrink:0;font-size:10.5px;font-weight:700;color:var(--muted);background:var(--alt);padding:4px 10px;border-radius:999px;white-space:nowrap">近日公開</span>
-              </div>
-            </sc-for>
-          </div>
-        </div>
-
         <div style="margin-top:44px;text-align:center;background:var(--alt);border:1px solid var(--line);border-radius:4px;padding:clamp(28px,4vw,44px)">
           <h3 style="font-weight:900;font-size:clamp(19px,2.6vw,24px)">この結果について、詳しく相談する</h3>
           <p style="margin-top:10px;font-size:14px;color:var(--muted);line-height:1.9">診断結果をもとに、現場の状況をヒアリングします。まずは無償のご相談から。</p>
@@ -221,19 +204,19 @@ const DOMAINS = [
       { q:'価格交渉への対応は、どのレベルですか？', options:['値引き要求には応じることが多い','一旦持ち帰って上司に相談している','価値を再提示しながら交渉する材料を持っている','BATNAを踏まえた交渉戦略があり、価格以外の条件でも着地させられる'] },
       { q:'失注・保留案件への対応は？', options:['失注したら、そこで一区切りにしている','一応理由を聞いて記録している','失注理由を分析し次の提案に活かしている','失注後もナーチャリングし、タイミングを見て再アプローチする仕組みがある'] },
     ] },
-  { key:'pipeline', label:'パイプライン管理・フォーキャスト精度', service:'Salesforce運用整備支援',
+  { key:'pipeline', label:'パイプライン管理・フォーキャスト精度', service:'各種SFAの運用整備支援',
     questions:[
       { q:'パイプラインの可視化状況は？', options:['Excelや頭の中で管理している','SFAには入力しているが、更新頻度にはばらつきがある','案件のステージ定義に沿って日次で更新している','パイプラインが常にリアルタイムで正確で、チーム全体から信頼されている'] },
       { q:'フォーキャストの精度は？', options:['感覚で報告することが多い','案件金額の合計をそのまま報告している','確度別に加重した数字で報告している','過去実績データに基づく予測モデルで高精度に着地を読めている'] },
       { q:'停滞案件の管理は、どうしていますか？', options:['停滞案件には、あまり気づけていない','たまに見直す程度','停滞日数をルールで定義し、定期的に棚卸ししている','停滞の予兆を早期検知し、自動でアラート・打ち手が発動する仕組みがある'] },
     ] },
-  { key:'sfdc', label:'Salesforce活用・データ活用', service:'Salesforce導入・ダッシュボード構築',
+  { key:'sfdc', label:'SFA・CRM活用・データ活用', service:'各種SFA/CRMの導入・ダッシュボード構築',
     questions:[
       { q:'日々の入力習慣は？', options:['入力はあまり定着していない','言われた項目だけ入力している','商談後すぐに必要項目を入力する習慣がある','入力が自動・半自動化され、正確なデータが自然に溜まる仕組みがある'] },
       { q:'レポート・ダッシュボードの活用状況は？', options:['レポートは、まだあまり見る機会がない','上司に言われた時に見る程度','自分の数字を定期的に自分で確認し行動を調整している','ダッシュボードを起点に日々の優先順位を意思決定している'] },
       { q:'データに基づく振り返りは、どの程度していますか？', options:['感覚的に振り返ることが多い','月次の数字は見るが、分析までは踏み込めていない','商談化率・受注率などの指標で自分の傾向を把握している','データから自分の勝ちパターンを言語化し、再現性を持って実行している'] },
     ] },
-  { key:'model', label:'型化・仕組み化（The Model）', service:'The Model導入・営業プロセス設計コンサル',
+  { key:'model', label:'型化・仕組み化', service:'営業の型化・営業プロセス設計コンサル',
     questions:[
       { q:'営業プロセスの型は、どの程度整っていますか？', options:['個人のやり方に委ねられている','なんとなく共有された流れがある','部門・フェーズごとの役割分担（The Model型）が明確','型がドキュメント化され、新人でも一定水準で再現できる'] },
       { q:'マーケ・CSなど他部門との連携は？', options:['他部門との連携は、まだこれから','必要な時だけ連絡を取っている','定例で情報共有する仕組みがある','共通のKPIと情報基盤で一気通貫に連携できている'] },
@@ -311,6 +294,7 @@ class Component extends DCLogic {
         closing: '商談序盤から逆算したクロージング設計と、失注案件のナーチャリング体制が鍵です。',
         pipeline: 'ステージ定義の徹底と、停滞案件の早期検知の仕組み化で予測精度が上がります。',
         sfdc: '入力の自動化・半自動化を進め、ダッシュボードを日々の意思決定の起点にしましょう。',
+
         model: '役割分担と型のドキュメント化を進め、新人でも再現できる状態を目指します。',
       };
       return { key: d.key, label: d.label, service: d.service, avg, pct, levelLabel: lvl.label, levelColor: lvl.color, advice: adviceMap[d.key] };
@@ -361,7 +345,5 @@ class Component extends DCLogic {
   }
 }
 </script>
-
-<script src="./tina-widget-embed.js"></script>
 </body>
 </html>

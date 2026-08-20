@@ -37,7 +37,25 @@
   .nav-dd-item:hover{background:var(--tint)}
   .nav-dd-item .ico{width:34px;height:34px;border-radius:3px;background:var(--navy);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
   .nav-dd-item:hover .ico{background:var(--accent)}
+  nav a{white-space:nowrap;flex-shrink:0}
+  /* keep hero copy clear of the fixed left consultation tab */
+  @media (max-width:1400px){ .hero-inner{padding-left:96px !important} }
+  @media (max-width:560px){ .hero-inner{padding-left:82px !important} }
   @media (max-width:720px){ .founder-grid{grid-template-columns:1fr !important} }
+
+  /* hero entrance */
+  @keyframes heroLine{from{transform:translateY(112%)}to{transform:translateY(0)}}
+  @keyframes heroUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes heroRule{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes heroZoom{from{transform:scale(1.1)}to{transform:scale(1)}}
+  .h-mask{display:block;overflow:hidden}
+  .h-mask > span{display:block;transform:translateY(112%);animation:heroLine 1.05s cubic-bezier(.16,.84,.28,1) forwards}
+  .h-up{opacity:0;animation:heroUp .9s cubic-bezier(.16,.84,.28,1) forwards}
+  .h-rule{transform:scaleX(0);transform-origin:left;animation:heroRule .8s cubic-bezier(.16,.84,.28,1) forwards}
+  .h-bg{animation:heroZoom 2.4s cubic-bezier(.2,.7,.3,1) forwards}
+  @media (prefers-reduced-motion:reduce){
+    .h-mask > span,.h-up,.h-rule,.h-bg{animation:none !important;opacity:1 !important;transform:none !important}
+  }
 </style>
 <script src="image-slot.js"></script>
 </helmet>
@@ -71,6 +89,7 @@
             </div>
           </div>
           <a href="#why" data-navlink="why" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink)">強み</a>
+          <a href="#whitepaper" data-navlink="whitepaper" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink)">資料ダウンロード</a>
           <a href="#faq" data-navlink="faq" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink)">よくある質問</a>
           <a href="会社概要.dc.html" data-navlink="company" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink)">会社概要</a>
           <a href="https://note.com/ideal_avocet6585" target="_blank" rel="noopener noreferrer" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink);display:inline-flex;align-items:center;gap:4px">note<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
@@ -92,6 +111,7 @@
         <a href="サービス_ハンズオン営業支援.dc.html" onClick="{{ closeMenu }}" style="text-decoration:none;padding:10px 0 10px 16px;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)">└ ハンズオン営業支援</a>
         <a href="サービス_マネジメント育成支援.dc.html" onClick="{{ closeMenu }}" style="text-decoration:none;padding:10px 0 10px 16px;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)">└ マネジメント・育成支援</a>
         <a href="#why" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">強み</a>
+        <a href="#whitepaper" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">資料ダウンロード</a>
         <a href="#faq" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">よくある質問</a>
         <a href="会社概要.dc.html" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">会社概要</a>
         <a href="https://note.com/ideal_avocet6585" target="_blank" rel="noopener noreferrer" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500;display:flex;align-items:center;gap:5px">note<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
@@ -101,29 +121,29 @@
   </nav>
 
   <!-- ===================== HERO ===================== -->
-  <header id="top" style="position:relative;scroll-margin-top:72px">
-    <div style="max-width:1320px;margin:0 auto;padding:clamp(44px,7vw,88px) 24px clamp(52px,8vw,104px);display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:clamp(36px,5vw,68px);align-items:center">
-      <div>
-        <p style="font-size:13px;letter-spacing:.3em;font-weight:700;color:var(--navy);text-transform:uppercase">Human Anthem</p>
-        <div style="width:56px;height:4px;background:var(--navy);margin:26px 0 24px"></div>
-        <h1 style="font-weight:900;font-size:clamp(36px,5.6vw,66px);line-height:1.18;letter-spacing:-.01em;color:var(--ink)">こんな時代に、<br><span style="color:var(--navy)">人間讃歌を。</span></h1>
-        <p style="margin-top:26px;font-size:12.5px;letter-spacing:.16em;font-weight:700;color:var(--muted);text-transform:uppercase">Forward Deployed Sales Organization</p>
-        <p style="margin-top:8px;font-size:clamp(16px,2vw,20px);font-weight:700;color:var(--ink)">営業組織・顧客接点強化コンサルティング</p>
-        <p style="margin-top:14px;max-width:620px;font-size:clamp(15px,1.6vw,16px);color:var(--muted);line-height:1.9;text-wrap:pretty">営業代行でも、ツール導入でもない。<br>現場に入り、テクノロジーを駆使し組織を内側から変える——<br>伴走型の営業組織・顧客接点強化コンサルティング。</p>
-        <div style="margin-top:34px;display:flex;flex-wrap:wrap;gap:14px">
+  <header id="top" style="position:relative;scroll-margin-top:72px;overflow:hidden">
+    <div class="h-bg" style="position:absolute;inset:0;z-index:0;overflow:hidden;background:#0a1424">
+      <video src="assets/hero.mp4" poster="assets/hero.png" autoplay muted playsinline preload="auto" aria-hidden="true" style="position:absolute;top:-16%;left:-16%;width:132%;height:132%;object-fit:cover"></video>
+    </div>
+    <img data-hero-still src="assets/hero.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;transition:opacity .9s ease">
+    <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(100deg, rgba(10,20,36,.94) 0%, rgba(10,20,36,.86) 32%, rgba(10,20,36,.55) 58%, rgba(10,20,36,.28) 100%)"></div>
+    <div style="position:relative;z-index:2;max-width:1320px;margin:0 auto;padding:clamp(64px,10vw,128px) 24px clamp(72px,11vw,140px)" class="hero-inner">
+      <div style="max-width:640px">
+        <p class="h-up" style="animation-delay:.05s;font-size:13px;letter-spacing:.3em;font-weight:700;color:#8fb4de;text-transform:uppercase">Human Anthem</p>
+        <div class="h-rule" style="animation-delay:.18s;width:56px;height:4px;background:var(--accent);margin:26px 0 24px"></div>
+        <h1 style="font-weight:900;font-size:clamp(36px,5.6vw,66px);line-height:1.18;letter-spacing:-.01em;color:#fff"><span class="h-mask"><span style="animation-delay:.3s">こんな時代に、</span></span><span class="h-mask"><span style="animation-delay:.44s">人間讃歌を。</span></span></h1>
+        <p class="h-up" style="animation-delay:.78s;margin-top:26px;font-size:12.5px;letter-spacing:.16em;font-weight:700;color:#9db8d6;text-transform:uppercase">Forward Deployed Sales Organization</p>
+        <p class="h-up" style="animation-delay:.88s;margin-top:8px;font-size:clamp(16px,2vw,20px);font-weight:700;color:#fff">営業組織・顧客接点強化コンサルティング</p>
+        <p class="h-up" style="animation-delay:1s;margin-top:14px;max-width:600px;font-size:clamp(15px,1.6vw,16px);color:rgba(255,255,255,.82);line-height:1.9;text-wrap:pretty">営業代行でも、ツール導入でもない。<br>現場に入り、テクノロジーを駆使し組織を内側から変える——<br>伴走型の営業組織・顧客接点強化コンサルティング。</p>
+        <div class="h-up" style="animation-delay:1.14s;margin-top:34px;display:flex;flex-wrap:wrap;gap:14px">
           <a href="#contact" style="text-decoration:none;display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#fff;padding:16px 30px;font-weight:700;font-size:15px;letter-spacing:.02em;border-radius:2px" style-hover="background:var(--accent-deep)">無料相談を申し込む<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-          <a href="#services" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--navy);color:var(--navy);padding:16px 30px;font-weight:700;font-size:15px;letter-spacing:.02em;border-radius:2px" style-hover="background:var(--tint)">サービスを見る</a>
+          <a href="#services" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.6);color:#fff;padding:16px 30px;font-weight:700;font-size:15px;letter-spacing:.02em;border-radius:2px" style-hover="background:rgba(255,255,255,.1)">サービスを見る</a>
         </div>
-        <a href="https://note.com/ideal_avocet6585" target="_blank" rel="noopener noreferrer" style="margin-top:24px;text-decoration:none;display:inline-flex;align-items:center;gap:11px;font-size:17px;font-weight:700;color:var(--navy)" style-hover="color:var(--accent)">
-          <span style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--tint)"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6"/><path d="M9 17h4"/></svg></span>
+        <a href="https://note.com/ideal_avocet6585" target="_blank" rel="noopener noreferrer" class="h-up" style="animation-delay:1.26s;margin-top:24px;text-decoration:none;display:inline-flex;align-items:center;gap:11px;font-size:17px;font-weight:700;color:#fff" style-hover="color:#ffd9b0">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.14)"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6"/><path d="M9 17h4"/></svg></span>
           代表のnoteを読む
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
         </a>
-      </div>
-      <div style="position:relative">
-        <div style="position:absolute;left:-14px;top:-14px;width:64px;height:64px;border-left:4px solid var(--navy);border-top:4px solid var(--navy);z-index:2"></div>
-        <img src="assets/hero.png" alt="握手するビジネスパーソン" style="display:block;width:100%;height:clamp(300px,42vw,470px);object-fit:cover;border-radius:2px;box-shadow:0 24px 60px -24px rgba(20,43,74,.45)">
-        <div data-motif style="position:absolute;right:18px;bottom:20px;writing-mode:vertical-rl;font-family:var(--serif);font-weight:700;font-size:clamp(24px,3vw,38px);letter-spacing:.18em;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.55)">火を、灯す。</div>
       </div>
     </div>
   </header>
@@ -146,21 +166,21 @@
       <div style="margin-top:48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,4vw,52px);align-items:stretch">
         <div data-reveal style="background:var(--navy);color:#fff;padding:clamp(32px,4vw,48px) clamp(26px,3vw,40px);position:relative;overflow:hidden;display:flex;flex-direction:column;height:100%">
           <div style="position:absolute;top:8px;left:22px;font-family:Georgia,serif;font-size:140px;line-height:1;color:rgba(255,255,255,.06);pointer-events:none">”</div>
-          <p style="position:relative;font-family:var(--serif);font-size:clamp(20px,2.5vw,27px);font-weight:700;line-height:1.55;letter-spacing:.02em">良いものを作れば売れるという神話が崩れ、<br>人手不足に苦しむこの国へ。</p>
+          <p style="position:relative;font-family:var(--serif);font-size:clamp(20px,2.5vw,27px);font-weight:700;line-height:1.55;letter-spacing:.02em;text-wrap:balance">良いものを作れば売れる——<br>そんな神話が崩れ、人手不足に苦しむこの国へ。</p>
           <div style="width:40px;height:3px;background:#fff;opacity:.5;margin:24px 0"></div>
-          <p style="font-size:15px;color:rgba(255,255,255,.82);line-height:2">ものづくり大国としての栄光がいまだ根深く、日本人は営業が苦手なのではないか——そう感じてきました。Cloudも AI開発も後塵を拝しましたが、<span style="color:#fff;font-weight:700">ツールを使いこなすことにおいては世界一</span>だと思っています。</p>
-          <p style="margin-top:18px;font-size:15px;color:rgba(255,255,255,.82);line-height:2">良いものを作れるこの国の400万近い企業が<span style="color:#fff;font-weight:700">世界に伝える力・交渉する力</span>を磨くこと。それが経済を回す鍵だとIKKIは考えます。だって世界一いいものを作れる国じゃないですか。</p>
-          <p style="margin-top:18px;font-size:15px;color:rgba(255,255,255,.82);line-height:2">IKKIは法人が元気になること、即ち国が元気になること。そこに強い想いを持って向き合います。</p>
+          <p style="font-size:15px;color:rgba(255,255,255,.82);line-height:2">ものづくり大国としての栄光がいまだ根深く、日本人は営業が苦手なのではないか——そう感じてきました。クラウドもAI開発も後塵を拝しましたが、<span style="color:#fff;font-weight:700">ツールを使いこなす力においては世界トップクラス</span>だと思っています。</p>
+          <p style="margin-top:18px;font-size:15px;color:rgba(255,255,255,.82);line-height:2">良いものを作れるこの国の400万近い企業が、<span style="color:#fff;font-weight:700">世界に伝える力・交渉する力</span>を磨くこと。それが経済を回す鍵だとIKKIは考えます。だって、世界一いいものを作れる国じゃないですか。</p>
+          <p style="margin-top:18px;font-size:15px;color:rgba(255,255,255,.82);line-height:2">IKKIは、<span style="color:#fff;font-weight:700">法人が元気になること、すなわち国が元気になること</span>。そこに強い想いを持って向き合います。</p>
         </div>
         <div data-reveal style="display:flex;flex-direction:column;height:100%">
           <p style="font-size:16px;color:var(--ink);line-height:2.1">株式会社IKKIは、<span style="font-weight:700;color:var(--navy)">「営業特化型支援」</span>という明確なコンセプトのもと、企業の売上課題に真正面から向き合います。</p>
-          <p style="margin-top:18px;font-size:16px;color:var(--ink);line-height:2.1">Salesforceを活用したデータドリブンな営業管理から、AIによる見込み客の発掘・育成まで。<span style="font-weight:700;color:var(--navy)">最新テクノロジーと豊富な現場経験</span>を組み合わせた独自のアプローチで成果を出し続けます。</p>
+          <p style="margin-top:18px;font-size:16px;color:var(--ink);line-height:2.1">Salesforce等SFA・CRMを活用したデータドリブンな営業管理から、AIによるアプリ開発、活用支援まで、<span style="font-weight:700;color:var(--navy)">最新テクノロジーと豊富な現場経験</span>を組み合わせた独自のアプローチで成果を出し続けます。</p>
           <p style="margin-top:18px;font-size:16px;color:var(--ink);line-height:2.1">私たちの使命は、クライアントが<span style="font-weight:700;color:var(--navy)">自走できる営業組織</span>を作り上げること。支援が終わった後も、成長し続けられる仕組みを構築します。</p>
           <div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:auto;padding-top:28px">
             <div style="background:#fff;border-left:4px solid var(--navy);padding:16px 16px;box-shadow:0 2px 12px rgba(20,43,74,.06)"><span style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--navy);opacity:.4;display:block">01</span><span style="display:block;margin-top:4px;font-size:14px;font-weight:700;color:var(--ink);line-height:1.6">営業戦略の立案・実行</span></div>
-            <div style="background:#fff;border-left:4px solid var(--navy);padding:16px 16px;box-shadow:0 2px 12px rgba(20,43,74,.06)"><span style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--navy);opacity:.4;display:block">02</span><span style="display:block;margin-top:4px;font-size:14px;font-weight:700;color:var(--ink);line-height:1.6">Salesforce 構築・運用</span></div>
-            <div style="background:#fff;border-left:4px solid var(--navy);padding:16px 16px;box-shadow:0 2px 12px rgba(20,43,74,.06)"><span style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--navy);opacity:.4;display:block">03</span><span style="display:block;margin-top:4px;font-size:14px;font-weight:700;color:var(--ink);line-height:1.6">AI活用による営業自動化</span></div>
-            <div style="background:#fff;border-left:4px solid var(--navy);padding:16px 16px;box-shadow:0 2px 12px rgba(20,43,74,.06)"><span style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--navy);opacity:.4;display:block">04</span><span style="display:block;margin-top:4px;font-size:14px;font-weight:700;color:var(--ink);line-height:1.6">人材育成・組織強化</span></div>
+            <div style="background:#fff;border-left:4px solid var(--navy);padding:16px 16px;box-shadow:0 2px 12px rgba(20,43,74,.06)"><span style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--navy);opacity:.4;display:block">02</span><span style="display:block;margin-top:4px;font-size:14px;font-weight:700;color:var(--ink);line-height:1.6">Salesforce Agentforceの構築・運用</span></div>
+            <div style="background:#fff;border-left:4px solid var(--navy);padding:16px 16px;box-shadow:0 2px 12px rgba(20,43,74,.06)"><span style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--navy);opacity:.4;display:block">03</span><span style="display:block;margin-top:4px;font-size:14px;font-weight:700;color:var(--ink);line-height:1.6">AI活用による営業生産性向上、仕組み作り</span></div>
+            <div style="background:#fff;border-left:4px solid var(--navy);padding:16px 16px;box-shadow:0 2px 12px rgba(20,43,74,.06)"><span style="font-family:var(--serif);font-size:22px;font-weight:700;color:var(--navy);opacity:.4;display:block">04</span><span style="display:block;margin-top:4px;font-size:14px;font-weight:700;color:var(--ink);line-height:1.6">人材育成・組織強化・研修</span></div>
           </div>
         </div>
       </div>
@@ -187,10 +207,9 @@
             </div>
           </div>
           <div style="padding:12px 26px 26px;flex:1">
-            <div style="display:flex;align-items:flex-start;gap:11px;padding:13px 0;border-bottom:1px solid var(--line)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--navy);flex-shrink:0;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span style="font-size:15px;line-height:1.6">Salesforce 活用支援</span></div>
-            <div style="display:flex;align-items:flex-start;gap:11px;padding:13px 0;border-bottom:1px solid var(--line)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--navy);flex-shrink:0;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span style="font-size:15px;line-height:1.6">SFA / CRM 活用・構築支援</span></div>
+            <div style="display:flex;align-items:flex-start;gap:11px;padding:13px 0;border-bottom:1px solid var(--line)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--navy);flex-shrink:0;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span style="font-size:15px;line-height:1.6">Salesforce・Agentforce構築・活用支援</span></div>
             <div style="display:flex;align-items:flex-start;gap:11px;padding:13px 0;border-bottom:1px solid var(--line)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--navy);flex-shrink:0;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span style="font-size:15px;line-height:1.6">PM（プロジェクト管理）支援</span></div>
-            <div style="display:flex;align-items:flex-start;gap:11px;padding:13px 0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--navy);flex-shrink:0;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span style="font-size:15px;line-height:1.6;display:flex;align-items:center;gap:9px;flex-wrap:wrap">Agentforce 構築・活用支援<span style="font-size:11px;font-weight:700;color:#fff;background:var(--navy);padding:3px 9px;border-radius:2px;letter-spacing:.04em">AI 注力領域</span></span></div>
+            <div style="display:flex;align-items:flex-start;gap:11px;padding:13px 0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--navy);flex-shrink:0;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg><span style="font-size:15px;line-height:1.6;display:flex;align-items:center;gap:9px;flex-wrap:wrap">営業現場におけるAIアプリ開発・構築・運用支援<span style="font-size:11px;font-weight:700;color:#fff;background:var(--navy);padding:3px 9px;border-radius:2px;letter-spacing:.04em">AI 注力領域</span></span></div>
           </div>
           <div style="margin-top:auto;padding:16px 26px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between"><span class="svc-more-text" style="font-size:13px;font-weight:700;color:var(--navy)">詳しく見る</span><svg class="svc-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
         </a>
@@ -255,7 +274,7 @@
       </div>
       <p data-reveal style="margin-top:34px;font-size:clamp(15px,1.8vw,18px);color:#cdd9e8">一つでも詰まるなら——そこに、伸びしろがあります。</p>
       <div data-reveal style="margin-top:24px;padding:24px 26px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-left:3px solid #ffd9b0;border-radius:3px">
-        <p style="font-size:clamp(15px,1.8vw,18px);line-height:2;color:#e4ebf3">IKKIのアプローチ手法で意識することは、<span style="color:#ffd9b0;font-weight:700">"人間らしさ・ナラティブさ"を意識したコミュニケーション</span>と、<span style="color:#ffd9b0;font-weight:700">最新のテクノロジー</span>を使うこと。この両輪で、現場にアプローチします。</p>
+        <p style="font-size:clamp(15px,1.8vw,18px);line-height:2;color:#e4ebf3">IKKIのアプローチ手法で意識することは、<span style="color:#ffd9b0;font-weight:700">"人間らしさ・物語性"を意識したコミュニケーション</span>と、<span style="color:#ffd9b0;font-weight:700">最新のテクノロジー</span>を使うこと。この両輪で、現場にアプローチします。</p>
       </div>
     </div>
   </section>
@@ -264,7 +283,7 @@
   <section id="why" style="padding:clamp(64px,9vw,120px) 24px;scroll-margin-top:72px">
     <div style="max-width:1320px;margin:0 auto">
       <p data-reveal style="font-size:13px;letter-spacing:.3em;font-weight:700;color:var(--navy);text-transform:uppercase">Why IKKI</p>
-      <h2 data-reveal style="margin-top:16px;font-weight:900;font-size:clamp(27px,4.4vw,44px);line-height:1.3;letter-spacing:-.01em">営業代行・ベンダーと、<br>何が違うのか</h2>
+      <h2 data-reveal style="margin-top:16px;font-weight:900;font-size:clamp(27px,4.4vw,44px);line-height:1.3;letter-spacing:-.01em">営業代行・ツールベンダー・<br>ツール設定会社と、何が違うのか</h2>
       <div data-reveal style="margin-top:48px;overflow-x:auto;-webkit-overflow-scrolling:touch">
         <table style="width:100%;min-width:720px;border-collapse:collapse;font-size:15px">
           <thead>
@@ -371,7 +390,7 @@
                   <h4 style="margin-top:2px;font-weight:900;font-size:19px">ダッシュボード設計支援キット</h4>
                 </div>
               </div>
-              <p style="margin-top:16px;font-size:14.5px;color:var(--muted);line-height:1.95">「何を見て意思決定するか」から逆算し、Salesforce等のダッシュボードを設計するキット。見るべきKPIを絞り込み、数字が行動につながる形に整理します。</p>
+              <p style="margin-top:16px;font-size:14.5px;color:var(--muted);line-height:1.95">「何を見て意思決定するか」から逆算し、SFA/CRM等のダッシュボードを設計するキット。見るべきKPIを絞り込み、数字が行動につながる形に整理します。</p>
             </div>
           </div>
           <div data-reveal style="background:#fff;border:1px solid var(--line);border-radius:4px;overflow:hidden;box-shadow:0 6px 28px -18px rgba(20,43,74,.4)">
@@ -383,10 +402,10 @@
                 <span style="font-family:var(--serif);font-size:24px;font-weight:700;color:var(--navy);opacity:.5">02</span>
                 <div>
                   <p style="font-size:11px;letter-spacing:.18em;font-weight:700;color:var(--navy)">WORKSHOP KIT 02</p>
-                  <h4 style="margin-top:2px;font-weight:900;font-size:19px">商談におけるSWOT定義マップ</h4>
+                  <h4 style="margin-top:2px;font-weight:900;font-size:19px">コマーシャルインサイト<span style="font-size:13px;font-weight:500;color:var(--muted)">（顧客が気づいていない自社の強みにつながる課題）</span>作成マップ</h4>
                 </div>
               </div>
-              <p style="margin-top:16px;font-size:14.5px;color:var(--muted);line-height:1.95">個別の商談における自社の強み・弱み・機会・脅威（SWOT）を整理し、勝ち筋を定義するマップ。営業手法の再構築・見直しの起点になります。</p>
+              <p style="margin-top:16px;font-size:14.5px;color:var(--muted);line-height:1.95">顧客がまだ気づいていない課題を掘り起こし、自社の強みに結びつけて言語化するマップ。「なぜ自社が選ばれるのか」を全員が同じ言葉で語れる状態をつくります。</p>
             </div>
           </div>
           <div data-reveal style="background:#fff;border:1px solid var(--line);border-radius:4px;overflow:hidden;box-shadow:0 6px 28px -18px rgba(20,43,74,.4)">
@@ -417,9 +436,7 @@
       <h2 data-reveal style="margin-top:16px;font-weight:900;font-size:clamp(27px,4.4vw,44px);letter-spacing:-.01em">代表紹介</h2>
       <div class="founder-grid" style="margin-top:48px;display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:clamp(32px,5vw,64px);align-items:start">
         <div data-reveal>
-          <div style="aspect-ratio:3/4;background:repeating-linear-gradient(45deg,#eef1f5,#eef1f5 11px,#e6ebf1 11px,#e6ebf1 22px);display:flex;align-items:center;justify-content:center;border:1px solid var(--line)">
-            <span style="font-family:monospace;font-size:13px;color:#98a2b1;letter-spacing:.05em">代表 顔写真</span>
-          </div>
+          <img src="assets/founder-v2.jpg" alt="株式会社IKKI 代表取締役 三浦 浩幸" style="display:block;width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 22%;border:1px solid var(--line)">
           <h3 style="margin-top:22px;font-weight:900;font-size:26px;letter-spacing:.04em">三浦 浩幸</h3>
           <p style="margin-top:6px;font-size:14px;color:var(--muted)">代表取締役 / 株式会社IKKI</p>
         </div>
@@ -429,9 +446,10 @@
               <p style="font-size:12px;letter-spacing:.2em;font-weight:700;color:var(--navy)">CAREER</p>
               <div style="margin-top:14px">
                 <div style="display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)"><span style="flex-shrink:0;width:48px;font-size:13px;font-weight:700;color:var(--navy)">2009</span><span style="font-size:14px;line-height:1.6">広告代理店 入社</span></div>
-                <div style="display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)"><span style="flex-shrink:0;width:48px;font-size:13px;font-weight:700;color:var(--navy)">2013</span><span style="font-size:14px;line-height:1.6">Salesforce.com（現Salesforce Japan）SRとして入社</span></div>
-                <div style="display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)"><span style="flex-shrink:0;width:48px;font-size:13px;font-weight:700;color:var(--navy)">2016</span><span style="font-size:14px;line-height:1.6">Account Executive</span></div>
-                <div style="display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)"><span style="flex-shrink:0;width:48px;font-size:13px;font-weight:700;color:var(--navy)">2022</span><span style="font-size:14px;line-height:1.6">Salesforce Japan コマーシャル営業 部長</span></div>
+                <div style="display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)"><span style="flex-shrink:0;width:48px;font-size:13px;font-weight:700;color:var(--navy)">2013</span><span style="font-size:14px;line-height:1.6">Salesforce.com（現Salesforce Japan）へSR（インサイドセールス）として入社</span></div>
+                <div style="display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)"><span style="flex-shrink:0;width:48px;font-size:13px;font-weight:700;color:var(--navy)">2015</span><span style="font-size:14px;line-height:1.6">BDRとして地方専任アウトバウンダーの一人目を担当</span></div>
+                <div style="display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)"><span style="flex-shrink:0;width:48px;font-size:13px;font-weight:700;color:var(--navy)">2016</span><span style="font-size:14px;line-height:1.6">Account Executive（フィールドセールス）を担当</span></div>
+                <div style="display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)"><span style="flex-shrink:0;width:48px;font-size:13px;font-weight:700;color:var(--navy)">2022</span><span style="font-size:14px;line-height:1.6">CBU営業部門の営業マネージャーに就任</span></div>
                 <div style="display:flex;gap:14px;padding:11px 0"><span style="flex-shrink:0;width:48px;font-size:13px;font-weight:700;color:var(--navy)">2026</span><span style="font-size:14px;line-height:1.6;font-weight:700">株式会社IKKI 設立（代表取締役）</span></div>
               </div>
             </div>
@@ -489,6 +507,27 @@
           <span style="flex-shrink:0;display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;padding:14px 26px;font-weight:700;font-size:14px;border-radius:2px">noteを見る<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
         </a>
       </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WHITEPAPER ===================== -->
+  <section id="whitepaper" style="background:var(--alt);padding:clamp(64px,9vw,120px) 24px;scroll-margin-top:72px">
+    <div style="max-width:1320px;margin:0 auto">
+      <p data-reveal style="font-size:13px;letter-spacing:.3em;font-weight:700;color:var(--navy);text-transform:uppercase">Whitepaper</p>
+      <h2 data-reveal style="margin-top:16px;font-weight:900;font-size:clamp(27px,4.4vw,44px);letter-spacing:-.01em">資料ダウンロード</h2>
+      <p data-reveal style="margin-top:14px;max-width:720px;font-size:clamp(15px,1.7vw,17px);color:var(--muted);line-height:1.9">現場で使える営業に関するノウハウやツール等の情報を無料の資料に今後まとめていきます。</p>
+      <div data-reveal style="margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px">
+        <sc-for list="{{ whitepapers }}" as="w" hint-placeholder-count="1">
+          <a href="{{ w.href }}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:4px;padding:26px 28px;display:flex;flex-direction:column;gap:12px;transition:border-color .18s ease,transform .18s ease,box-shadow .18s ease" style-hover="border-color:var(--navy);transform:translateY(-3px);box-shadow:0 14px 32px -22px rgba(20,43,74,.5)">
+            <span style="width:46px;height:46px;border-radius:3px;background:var(--tint);display:flex;align-items:center;justify-content:center">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+            </span>
+            <span style="font-size:16.5px;font-weight:700;color:var(--ink);line-height:1.6">{{ w.title }}</span>
+            <span style="font-size:14px;color:var(--muted);line-height:1.9">{{ w.desc }}</span>
+            <span style="margin-top:4px;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:var(--accent)">PDFをひらく<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+          </a>
+        </sc-for>
       </div>
     </div>
   </section>
@@ -567,21 +606,21 @@
       <div style="display:flex;flex-wrap:wrap;align-items:center;gap:24px">
         <a href="利用規約_AI活用支援.dc.html" style="font-size:12px;color:#9db8d6;text-decoration:none;letter-spacing:.04em" style-hover="color:#fff">AI活用支援 利用規約</a>
         <a href="#" onClick="{{ openPrivacy }}" style="font-size:12px;color:#9db8d6;text-decoration:none;letter-spacing:.04em" style-hover="color:#fff">個人情報の取り扱いについて</a>
-        <p style="font-size:12px;color:#8ba4c2;letter-spacing:.04em">© 2026 IKKI Inc. All rights reserved.</p>
+        <p style="font-size:12px;color:#8ba4c2;letter-spacing:.04em">© Copyright 2026 IKKI Inc. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <!-- ===================== CONSULTATION DRAWER ===================== -->
   <sc-if value="{{ drawerClosed }}" hint-placeholder-val="{{ true }}">
-    <button onClick="{{ openDrawer }}" aria-label="無料相談" style="position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:980;background:var(--accent);color:#fff;border:none;border-radius:6px 0 0 6px;width:64px;height:208px;cursor:pointer;box-shadow:-6px 0 22px rgba(220,84,48,.32);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:0" style-hover="background:var(--accent-deep)">
+    <button onClick="{{ openDrawer }}" aria-label="無料相談" style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:980;background:var(--accent);color:#fff;border:none;border-radius:0 6px 6px 0;width:64px;height:208px;cursor:pointer;box-shadow:6px 0 22px rgba(220,84,48,.32);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:0" style-hover="background:var(--accent-deep)">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
       <span style="writing-mode:vertical-rl;font-size:15px;font-weight:700;letter-spacing:.22em">無料相談</span>
     </button>
   </sc-if>
   <sc-if value="{{ drawerOpen }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeDrawer }}" style="position:fixed;inset:0;background:rgba(10,20,40,.45);z-index:1000;backdrop-filter:blur(2px);animation:fadeIn .25s ease"></div>
-    <div style="position:fixed;top:0;right:0;height:100vh;width:400px;max-width:92vw;background:#fff;z-index:1001;box-shadow:-8px 0 40px rgba(20,43,74,.18);display:flex;flex-direction:column;overflow-y:auto;animation:drawerIn .38s cubic-bezier(.4,0,.2,1)">
+    <div style="position:fixed;top:0;left:0;height:100vh;width:400px;max-width:92vw;background:#fff;z-index:1001;box-shadow:8px 0 40px rgba(20,43,74,.18);display:flex;flex-direction:column;overflow-y:auto;animation:drawerIn .38s cubic-bezier(.4,0,.2,1)">
       <div style="background:var(--navy);padding:28px 26px 24px;flex-shrink:0;display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
         <div>
           <p style="font-size:11px;font-weight:700;letter-spacing:.26em;color:#9db8d6;text-transform:uppercase">Free Consultation</p>
@@ -670,32 +709,41 @@ class Component extends DCLogic {
   FAQ = [
     { q: '最低の契約期間はどのくらいですか？', a: 'ハンズオン支援は成果が定着するまでを見据え、最短3ヶ月からをお願いしています。多くの場合、3〜6ヶ月で営業プロセスの共通言語化と初期成果が現れます。' },
     { q: '営業代行とは何が違うのですか？', a: '営業代行は外部リソースが商談を「代替」しますが、IKKIは現場に入り、御社の営業組織そのものを強くします。支援終了後も自走できる人材・仕組みが社内に残る点が決定的に異なります。' },
-    { q: 'Salesforce以外のSFA/CRMでも対応できますか？', a: 'はい。代表はSalesforceでの実績が豊富ですが、SFA/CRMの設計思想は共通です。HubSpot等の他ツールでも、活用設計から現場定着まで支援します。が、代表はSalesforceの自由度と進化が好きです。' },
+    { q: 'Salesforce以外のSFA/CRMでも対応できますか？', a: 'はい。代表はSalesforceでの実績が豊富ですが、SFA/CRMの核となる重要な思想は共通するものが多く目的は一緒です。他SFA・CRMツールでも、活用設計から現場定着まで支援します。が、代表はSalesforceの自由度と進化が好きです。' },
+    { q: '特に営業系のシステムを導入していませんが、研修だけお願いすることは可能でしょうか？', a: '可能です。普段マネジメントで使っている手法を教えていただきながら、内容をカスタマイズ致します。' },
     { q: '対応エリアは東京近郊だけですか？', a: 'オンラインを併用するため全国対応が可能です。定例MTGはオンライン、要所で現地訪問という形が一般的です。詳細はご相談ください。代表自身が地方出身のため、地方のお客様のご支援も積極的に実施したいという強い想いがございます。積極的に伺いますので、まずはご相談ください。' },
     { q: 'まず何から始めればよいですか？', a: 'まずは無償のヒアリングから。現場の課題を一緒に洗い出し、IKKIがお役に立てるかを率直にお伝えします。費用は一切かかりません。' },
   ];
 
   componentDidMount() {
     this.onResize = () => {
-      const m = window.innerWidth < 860;
+      const m = window.innerWidth < 1080;
       if (m !== this.state.isMobile) this.setState({ isMobile: m, menuOpen: false });
     };
     this.onResize();
     window.addEventListener('resize', this.onResize);
     this.applyTheme();
     this.setupReveal();
+    this.setupHeroVideo();
 
     // Auto-open the consultation drawer once past 45% scroll
-    this.autoOpened = false;
+    // 初回訪問時のみ自動表示（以降は localStorage で抑制）
+    let seenBefore = false;
+    try { seenBefore = window.localStorage.getItem('ikki_drawer_autoshown') === '1'; } catch (e) {}
+    this.autoOpened = seenBefore;
     this.onScroll = () => {
       if (this.autoOpened) return;
       const total = document.documentElement.scrollHeight - window.innerHeight;
-      if (total > 0 && window.scrollY / total >= 0.45) { this.autoOpened = true; this.setState({ drawerOpen: true }); }
+      if (total > 0 && window.scrollY / total >= 0.45) {
+        this.autoOpened = true;
+        try { window.localStorage.setItem('ikki_drawer_autoshown', '1'); } catch (e) {}
+        this.setState({ drawerOpen: true });
+      }
     };
     window.addEventListener('scroll', this.onScroll, { passive: true });
 
     // scroll-spy for nav highlight
-    this.navIds = ['why', 'services', 'faq'];
+    this.navIds = ['why', 'services', 'whitepaper', 'faq'];
     this.onSpy = () => {
       const y = window.scrollY + 140;
       let cur = '';
@@ -782,18 +830,30 @@ class Component extends DCLogic {
     if (typeof IntersectionObserver === 'undefined') return;
     const root = this.rootEl;
     if (!root) return;
+    const EASE = 'cubic-bezier(.16,.84,.28,1)';
     const els = root.querySelectorAll('[data-reveal]');
+    // stagger siblings within the same section, like the hero sequence
+    const seen = new Map();
     els.forEach(el => {
+      const sec = el.closest('section, header, footer') || root;
+      const n = seen.get(sec) || 0;
+      seen.set(sec, n + 1);
+      el.dataset.revealStep = String(Math.min(n, 6));
       el.style.opacity = '0';
-      el.style.transform = 'translateY(18px)';
-      el.style.transition = 'opacity .7s ease, transform .7s ease';
+      el.style.transform = 'translateY(26px)';
+      el.style.transition = `opacity .85s ${EASE}, transform .85s ${EASE}`;
     });
-    const reveal = (el) => { el.style.opacity = '1'; el.style.transform = 'none'; };
+    const reveal = (el) => {
+      const step = Number(el.dataset.revealStep || 0);
+      el.style.transitionDelay = `${step * 0.11}s`;
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    };
     this.io = new IntersectionObserver((ents) => {
       ents.forEach(e => {
         if (e.isIntersecting) { reveal(e.target); this.io.unobserve(e.target); }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -12% 0px' });
     els.forEach(el => {
       // reveal anything already in/above the viewport immediately
       const r = el.getBoundingClientRect();
@@ -804,6 +864,29 @@ class Component extends DCLogic {
     this._revealTimer = setTimeout(() => { els.forEach(reveal); }, 1800);
   }
 
+  setupHeroVideo() {
+    const scope = this.rootEl || document;
+    const el = scope.querySelector('header video');
+    const still = scope.querySelector('[data-hero-still]');
+    if (!el) return;
+    // 音声は常にオフ（属性だけでは残らないため毎回強制）
+    const silence = () => { el.muted = true; el.defaultMuted = true; el.volume = 0; };
+    silence();
+    el.addEventListener('play', silence);
+    el.addEventListener('volumechange', silence);
+    // 握手シーンは約4.6秒まで。以降は握手の静止画に切り替えて静止
+    const STOP_AT = 3.6;
+    const finish = () => {
+      try { el.pause(); } catch (e) {}
+      if (still) still.style.opacity = '1';
+    };
+    el.addEventListener('timeupdate', () => { if (el.currentTime >= STOP_AT) finish(); });
+    el.addEventListener('ended', finish);
+    el.addEventListener('error', finish);
+    if (el.currentTime >= STOP_AT) { finish(); return; }
+    el.play && el.play().catch(() => {});
+  }
+
   renderVals() {
     return {
       setRoot: (el) => { this.rootEl = el; },
@@ -812,9 +895,14 @@ class Component extends DCLogic {
       mobileMenuOpen: this.state.isMobile && this.state.menuOpen,
       toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
       closeMenu: () => this.setState({ menuOpen: false }),
+      whitepapers: [
+        { title: 'AI秘書ティナ 技術仕様書（公開版）', desc: '営業現場で使うAI秘書の設計思想と技術構成をまとめた資料です。', href: 'assets/whitepapers/ai-secretary-tina-spec.pdf' },
+      ],
       // consultation drawer
       drawerOpen: this.state.drawerOpen,
       openDrawer: () => this.setState({ drawerOpen: true }),
+      openDrawerFromNav: (e) => { e.preventDefault(); this.setState({ drawerOpen: true }); },
+      openDrawerFromMenu: (e) => { e.preventDefault(); this.setState({ menuOpen: false, drawerOpen: true }); },
       closeDrawer: () => { this.setState({ drawerOpen: false }); setTimeout(() => this.setState({ drawerDone: false }), 400); },
       drawerDone: this.state.drawerDone,
       drawerFormShow: !this.state.drawerDone,
@@ -850,7 +938,5 @@ class Component extends DCLogic {
   }
 }
 </script>
-
-<script src="./tina-widget-embed.js"></script>
 </body>
 </html>
