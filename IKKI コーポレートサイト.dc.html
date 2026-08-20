@@ -58,6 +58,7 @@
   }
 </style>
 <script src="image-slot.js"></script>
+<script src="./tina-widget-embed.js"></script>
 </helmet>
 
 <div ref="{{ setRoot }}" style="--navy:#1c3c66;--navy-deep:#142b4a;--accent:#dc5430;--accent-deep:#c34522;--ink:#16181c;--bg:#ffffff;--alt:#f6f8fa;--line:#e6e9ee;--muted:#5b6573;--tint:#eef2f7;--serif:'Shippori Mincho',serif;font-family:'Noto Sans JP',sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;overflow-x:hidden">
@@ -123,10 +124,10 @@
   <!-- ===================== HERO ===================== -->
   <header id="top" style="position:relative;scroll-margin-top:72px;overflow:hidden">
     <div class="h-bg" style="position:absolute;inset:0;z-index:0;overflow:hidden;background:#0a1424">
-      <video src="assets/hero.mp4" poster="assets/hero.png" autoplay muted playsinline preload="auto" aria-hidden="true" style="position:absolute;top:-16%;left:-16%;width:132%;height:132%;object-fit:cover"></video>
+      <video src="assets/hero.mp4" poster="assets/hero.png" autoplay muted playsinline preload="auto" aria-hidden="true" style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);width:100%;height:auto;min-height:56%"></video>
     </div>
     <div data-hero-still style="position:absolute;inset:0;z-index:0;overflow:hidden;opacity:0;transition:opacity .9s ease">
-      <img src="assets/hero.png" alt="" style="position:absolute;top:-16%;left:-16%;width:132%;height:132%;object-fit:cover">
+      <img src="assets/hero.png" alt="" style="position:absolute;top:38%;left:50%;transform:translate(-50%,-50%);width:100%;height:auto;min-height:56%">
     </div>
     <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(100deg, rgba(10,20,36,.94) 0%, rgba(10,20,36,.86) 32%, rgba(10,20,36,.55) 58%, rgba(10,20,36,.28) 100%)"></div>
     <div style="position:relative;z-index:2;max-width:1320px;margin:0 auto;padding:clamp(64px,10vw,128px) 24px clamp(72px,11vw,140px)" class="hero-inner">
