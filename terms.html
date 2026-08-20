@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8Q4H7R12XG"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8Q4H7R12XG');</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  a{color:inherit}
+  .nav-dd{position:relative}
+  .nav-dd-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:280px;background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 18px 44px -14px rgba(20,43,74,.32);padding:8px;opacity:0;visibility:hidden;transition:opacity .2s ease,transform .2s ease;z-index:60}
+  .nav-dd:hover .nav-dd-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(4px)}
+  .nav-dd-caret{transition:transform .2s ease}
+  .nav-dd:hover .nav-dd-caret{transform:rotate(180deg)}
+  .nav-dd-item{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:3px;text-decoration:none;transition:background .18s ease}
+  .nav-dd-item:hover{background:var(--tint)}
+  .nav-dd-item .ico{width:34px;height:34px;border-radius:3px;background:var(--navy);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
+  .nav-dd-item:hover .ico{background:var(--accent)}
+</style>
+<script src="./tina-widget-embed.js"></script>
+</helmet>
+
+<div style="--navy:#1c3c66;--navy-deep:#142b4a;--accent:#dc5430;--accent-deep:#c34522;--ink:#16181c;--bg:#ffffff;--alt:#f6f8fa;--line:#e6e9ee;--muted:#5b6573;--tint:#eef2f7;--serif:'Shippori Mincho',serif;font-family:'Noto Sans JP',sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;overflow-x:hidden">
+
+  <!-- ===================== NAV ===================== -->
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)">
+    <div style="max-width:1320px;margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:12px">
+        <img src="assets/ikki-logo-dark.png" alt="IKKI" style="height:30px;width:auto;display:block">
+        <span style="font-size:11px;letter-spacing:.18em;color:var(--muted);font-weight:700">株式会社IKKI</span>
+      </a>
+      <sc-if value="{{ showDesktopNav }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;align-items:center;gap:28px">
+          <div class="nav-dd" style="display:flex;align-items:center">
+            <a href="index.html#services" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink);display:inline-flex;align-items:center;gap:5px">サービス<svg class="nav-dd-caret" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+            <div class="nav-dd-menu">
+              <a class="nav-dd-item" href="service-technology.html">
+                <span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></span>
+                <span><span style="display:block;font-size:14px;font-weight:700;color:var(--ink)">テクノロジー支援</span><span style="display:block;font-size:11.5px;color:var(--muted);margin-top:1px">Salesforce・SFA/CRM・AI活用</span></span>
+              </a>
+              <a class="nav-dd-item" href="service-hands-on.html">
+                <span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></span>
+                <span><span style="display:block;font-size:14px;font-weight:700;color:var(--ink)">ハンズオン営業支援</span><span style="display:block;font-size:11.5px;color:var(--muted);margin-top:1px">商談レビュー・質問力/対応力強化</span></span>
+              </a>
+              <a class="nav-dd-item" href="service-management.html">
+                <span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                <span><span style="display:block;font-size:14px;font-weight:700;color:var(--ink)">マネジメント・育成支援</span><span style="display:block;font-size:11.5px;color:var(--muted);margin-top:1px">KPI策定・会議同席・GTM</span></span>
+              </a>
+            </div>
+          </div>
+          <a href="index.html#why" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink)">強み</a>
+          <a href="index.html#whitepaper" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink)">資料ダウンロード</a>
+          <a href="index.html#faq" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink)">よくある質問</a>
+          <a href="company.html" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink)">会社概要</a>
+          <a href="https://note.com/ideal_avocet6585" target="_blank" rel="noopener noreferrer" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink);display:inline-flex;align-items:center;gap:4px">note<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
+          <a href="index.html#contact" style="text-decoration:none;font-size:14px;font-weight:700;color:#fff;background:var(--accent);padding:11px 22px;border-radius:2px" style-hover="background:var(--accent-deep)">無料相談</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showMobileBtn }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-label="メニュー" style="border:none;background:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:8px">
+          <span style="width:24px;height:2px;background:var(--ink);display:block"></span>
+          <span style="width:24px;height:2px;background:var(--ink);display:block"></span>
+          <span style="width:24px;height:2px;background:var(--ink);display:block"></span>
+        </button>
+      </sc-if>
+    </div>
+    <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid var(--line);background:#fff;padding:12px 24px 20px;display:flex;flex-direction:column;gap:4px">
+        <a href="index.html#services" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">サービス</a>
+        <a href="service-technology.html" onClick="{{ closeMenu }}" style="text-decoration:none;padding:10px 0 10px 16px;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)">└ テクノロジー支援</a>
+        <a href="service-hands-on.html" onClick="{{ closeMenu }}" style="text-decoration:none;padding:10px 0 10px 16px;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)">└ ハンズオン営業支援</a>
+        <a href="service-management.html" onClick="{{ closeMenu }}" style="text-decoration:none;padding:10px 0 10px 16px;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)">└ マネジメント・育成支援</a>
+        <a href="index.html#why" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">強み</a>
+        <a href="index.html#whitepaper" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">資料ダウンロード</a>
+        <a href="index.html#faq" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">よくある質問</a>
+        <a href="company.html" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">会社概要</a>
+        <a href="https://note.com/ideal_avocet6585" target="_blank" rel="noopener noreferrer" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">note ↗</a>
+        <a href="index.html#contact" onClick="{{ closeMenu }}" style="text-decoration:none;margin-top:10px;text-align:center;font-weight:700;color:#fff;background:var(--accent);padding:14px;border-radius:2px">無料相談</a>
+      </div>
+    </sc-if>
+  </nav>
+
+  <!-- ===================== PAGE HEADER ===================== -->
+  <header style="background:var(--navy);color:#fff;padding:clamp(48px,7vw,84px) 24px">
+    <div style="max-width:900px;margin:0 auto">
+      <p style="font-size:13px;letter-spacing:.3em;font-weight:700;color:#9db8d6;text-transform:uppercase">Terms of Service</p>
+      <div style="width:56px;height:4px;background:#fff;margin:22px 0 20px"></div>
+      <h1 style="font-weight:900;font-size:clamp(27px,4.6vw,46px);line-height:1.25;letter-spacing:-.01em">AI活用支援 利用規約</h1>
+      <p style="margin-top:18px;font-size:13px;color:#9db8d6"><a href="index.html" style="text-decoration:none;color:#9db8d6" style-hover="color:#fff">ホーム</a><span style="margin:0 10px;opacity:.5">/</span>AI活用支援 利用規約</p>
+    </div>
+  </header>
+
+  <!-- ===================== BODY ===================== -->
+  <section style="padding:clamp(48px,7vw,88px) 24px">
+    <div style="max-width:900px;margin:0 auto">
+      <p style="font-size:13px;color:var(--muted)">最終改定日：2026年8月18日</p>
+      <p style="margin-top:20px;font-size:15px;line-height:2;padding:20px 24px;background:var(--alt);border-left:3px solid var(--navy);border-radius:3px">本利用規約（以下「本規約」）は、株式会社IKKI（以下「当社」）が提供する、生成AI（Claude Code 等の大規模言語モデルを含みます。以下「AI」）を活用した各種支援業務（以下「本サービス」）をご利用いただくにあたっての取り扱い、免責事項、およびサービス水準を定めるものです。本サービスには、SFA／CRM（Salesforce を含みます）の構築・設定・運用支援、AIを用いた業務アプリケーションの開発・構築（いわゆるバイブコーディングによる実装を含みます）、営業現場におけるAI活用の設計・定着支援、その他AIを用いた分析・資料作成・自動化の支援が含まれ、特定の製品・プラットフォームに限定されません。お客様は、本サービスを利用することにより、本規約に同意したものとみなされます。</p>
+
+      <!-- Article 1 -->
+      <div style="margin-top:44px">
+        <h2 style="font-size:clamp(18px,2.4vw,23px);font-weight:900;padding-bottom:12px;border-bottom:2px solid var(--navy)">第1条（目的と適用範囲）</h2>
+        <p style="margin-top:20px;font-size:15px;line-height:2;color:var(--ink)">本規約は、本サービスを利用するすべてのお客様（以下「ユーザー」）に適用されます。本サービスは、AIによる設定・メタデータ・ソースコード・スクリプト・ドキュメント等の生成および自動操作を通じて、ユーザーの業務システム、業務アプリケーション、および営業現場におけるAI活用の構築・運用を支援することを目的とします。対象となる環境・技術は、SFA／CRM（Salesforce 等）、各種SaaS、ノーコード／ローコード基盤、独自に開発するアプリケーション等を含み、特定の製品に限定されません。当社は、ユーザーの伴走者として支援を行うものであり、対象環境および成果物の最終的な管理・運用責任はユーザーに帰属します。</p>
+      </div>
+
+      <!-- Article 2 -->
+      <div style="margin-top:44px">
+        <h2 style="font-size:clamp(18px,2.4vw,23px);font-weight:900;padding-bottom:12px;border-bottom:2px solid var(--navy)">第2条（情報の取り扱い）</h2>
+        <p style="margin-top:20px;font-size:15px;line-height:2"><span style="font-weight:700;color:var(--navy)">取得と保管の区分：</span>本サービスの提供にあたり、当社はお客様の情報を「継続的に保管・管理する情報（永続情報）」と、「AI処理等のために一時的にのみ利用し破棄する情報（一時情報）」に分けて取り扱います。</p>
+        <div style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+          <div style="background:#fff;border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:3px;padding:24px 22px">
+            <p style="font-size:12px;letter-spacing:.14em;font-weight:700;color:var(--navy)">PERSISTENT</p>
+            <h3 style="margin-top:6px;font-size:16px;font-weight:700">永続情報（継続的に保管）</h3>
+            <p style="margin-top:12px;font-size:14px;color:var(--muted);line-height:1.9">本サービスの提供・改善・サポート、および契約管理を目的として、ユーザーの担当者連絡先（氏名・メールアドレス等）、対象システムへの接続認証情報（APIキー・トークン等を含みます）、構成設定・アーキテクチャに関する情報を、安全に管理された環境に保管・利用します。</p>
+          </div>
+          <div style="background:#fff;border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:3px;padding:24px 22px">
+            <p style="font-size:12px;letter-spacing:.14em;font-weight:700;color:var(--accent)">TEMPORARY</p>
+            <h3 style="margin-top:6px;font-size:16px;font-weight:700">一時情報（保存されず破棄）</h3>
+            <p style="margin-top:12px;font-size:14px;color:var(--muted);line-height:1.9">AI処理・コード生成・ファイル生成のために取得した対象システムの生レコード情報、既存のソースコード、お客様から共有された資料、AIが生成したバックアップ・中間生成物は、処理の実行中のみ一時的に利用し、処理完了後・納品後に速やかに破棄します。これらが当社データベースに永続的に保存されることはありません。</p>
+          </div>
+        </div>
+        <ol style="margin-top:22px;padding-left:22px;font-size:15px;line-height:2;color:var(--ink)">
+          <li style="margin-bottom:12px"><span style="font-weight:700">機密情報の保護：</span>作業の文脈維持のために会話・作業ログを保存する場合、個人情報・機密情報は可能な限りマスキング（匿名化）したうえで取り扱い、生の機密データがそのまま残らないよう努めます。</li>
+          <li style="margin-bottom:12px"><span style="font-weight:700">外部AIへの提供：</span>本サービスは、処理のために外部AI（Anthropic 等）のAPIへ一時情報および関連データを送信する場合があります。当社は、送信したデータが各AIプロバイダの基盤モデルの学習に利用されない設定・契約条件のもとで利用するよう努めます。</li>
+          <li><span style="font-weight:700">目的外利用の禁止：</span>取得した情報は、本サービスの提供・改善・サポートおよび法令に基づく対応の目的以外に、事前の同意なく第三者へ提供することはありません。</li>
+        </ol>
+      </div>
+
+      <!-- Article 3 -->
+      <div style="margin-top:44px">
+        <h2 style="font-size:clamp(18px,2.4vw,23px);font-weight:900;padding-bottom:12px;border-bottom:2px solid var(--navy)">第3条（作業範囲と承認プロセス）</h2>
+        <ol style="margin-top:20px;padding-left:22px;font-size:15px;line-height:2;color:var(--ink)">
+          <li style="margin-bottom:12px">AIによる設定変更・コード生成・アプリケーション実装は、原則として、ユーザーの承認を得たうえで適用・納品します。当社はユーザーの指示・承認の範囲内で作業を行います。</li>
+          <li style="margin-bottom:12px">本番環境（Production）への直接適用は極力避け、まず検証環境（Sandbox・ステージング環境等）にて動作の安全性・正確性を検証することを推奨します。ユーザーの依頼により本番環境へ適用する場合、その判断・確認はユーザーの責任において行われるものとします。</li>
+          <li style="margin-bottom:12px">AIを用いて開発した業務アプリケーション（バイブコーディングによる実装を含みます）は、迅速な立ち上げを目的とするものであり、長期運用に必要なテスト・監査・保守体制の整備については、別途ご相談のうえ範囲を定めます。</li>
+          <li>対象システムの権限設定・データ保持ポリシー等は、ユーザーのセキュリティ方針に従うものとし、当社は必要な範囲でのみアクセスします。</li>
+        </ol>
+      </div>
+
+      <!-- Article 4 -->
+      <div style="margin-top:44px">
+        <h2 style="font-size:clamp(18px,2.4vw,23px);font-weight:900;padding-bottom:12px;border-bottom:2px solid var(--navy)">第4条（サービス水準・免責対象事項）</h2>
+        <ol style="margin-top:20px;padding-left:22px;font-size:15px;line-height:2;color:var(--ink)">
+          <li style="margin-bottom:12px"><span style="font-weight:700">サポート対応：</span>お問い合わせ・障害報告への一次応答は、営業時間内（平日 10:00〜18:00 JST）において、原則2営業日以内を目安に行います。</li>
+          <li><span style="font-weight:700">対象外事項：</span>以下の要因による支援の遅延・停止は、当社のサービス水準の保障範囲外となります。
+            <ul style="margin-top:10px;padding-left:20px;color:var(--muted)">
+              <li style="margin-bottom:6px">外部API・外部サービス（各種SaaSのAPI、AIプロバイダのAPI、ホスティング事業者等）の仕様変更、停止、またはアクセス制限</li>
+              <li style="margin-bottom:6px">ユーザー環境における各種制限（APIコール数上限、ガバナ制限、利用プランの制約等）への到達</li>
+              <li>ユーザー側の環境・権限設定・回線等に起因する事象</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Article 5 (important) -->
+      <div style="margin-top:44px;background:#fbeae5;border:1px solid #f0c4b6;border-radius:4px;padding:clamp(24px,4vw,36px)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          <h2 style="font-size:clamp(18px,2.4vw,23px);font-weight:900;color:var(--accent-deep)">第5条（免責事項に関する重要確認事項）</h2>
+        </div>
+        <p style="margin-top:18px;font-size:15px;line-height:2">本サービスは、生成AI（LLM）を用いて、推論に基づき自律的にコード・設定・アプリケーションを生成します。そのため、以下のリスクが含まれることを予めご了承のうえ、<span style="font-weight:700;color:var(--accent-deep)">ユーザーご自身の確認・検証を前提として</span>ご利用ください。</p>
+        <ol style="margin-top:18px;padding-left:22px;font-size:15px;line-height:2;color:var(--ink)">
+          <li style="margin-bottom:12px"><span style="font-weight:700">予期せぬ変更・データ損失のリスク：</span>AI特有のハルシネーション（誤認・幻覚）により、意図しない設定・メタデータ・コードの追加・変更・上書き・削除が行われる可能性があり、既存データや運用ロジック、関連システムの正常な稼働が損なわれるおそれがあります。</li>
+          <li style="margin-bottom:12px"><span style="font-weight:700">生成コードの品質・セキュリティ：</span>AIが生成したソースコードには、論理的な誤り、性能上の問題、または脆弱性が含まれる可能性があります。本番運用に供する前に、ユーザーまたはユーザーの指定する第三者による動作検証・セキュリティレビューを実施してください。当社は生成コードの完全性・無欠陥性を保証しません。</li>
+          <li style="margin-bottom:12px"><span style="font-weight:700">第三者の権利・ライセンス：</span>AIの出力が、既存の著作物やオープンソースソフトウェアと類似する可能性を完全に排除することはできません。ライセンス条件の適合性および第三者の権利侵害の有無については、ユーザーの利用環境・用途に応じてご確認ください。</li>
+          <li style="margin-bottom:12px"><span style="font-weight:700">バックアップの不確実性：</span>変更前に可能な限りバックアップ（スナップショット）を取得するよう努めますが、APIの制約や不測の挙動により、取得や復元が保証されない場合があります。重要なデータは、ユーザー側でも別途バックアップを取得してください。</li>
+          <li><span style="font-weight:700">損害の免責：</span>当社は、本サービスの利用に起因して生じたデータの破損、業務の停止、およびそれに伴う直接的・間接的な損害・逸失利益等について、当社の故意または重大な過失による場合を除き、一切の責任を負いません。本番環境への適用は、必ず検証環境でのユーザーによるご検証を経たうえでご判断ください。</li>
+        </ol>
+      </div>
+
+      <!-- Article 6 -->
+      <div style="margin-top:44px">
+        <h2 style="font-size:clamp(18px,2.4vw,23px);font-weight:900;padding-bottom:12px;border-bottom:2px solid var(--navy)">第6条（成果物の取り扱いと第三者サービスの利用）</h2>
+        <ol style="margin-top:20px;padding-left:22px;font-size:15px;line-height:2;color:var(--ink)">
+          <li style="margin-bottom:12px"><span style="font-weight:700">成果物の権利：</span>本サービスにおいて個別に作成・納品した設定、ソースコード、アプリケーション、ドキュメント等（以下「成果物」）に関する権利は、対価の支払い完了をもってユーザーに帰属します。ただし、当社が従前から保有する汎用的なノウハウ、テンプレート、フレームワーク、および再利用可能な部品については、当社に権利が留保され、当社は他の案件においてもこれを利用できるものとします。</li>
+          <li style="margin-bottom:12px"><span style="font-weight:700">自走できる状態を前提とした納品：</span>当社は、特定のベンダーに依存しない運用を志向し、成果物の構成・設定内容をユーザーが把握・引き継ぎできる形での納品に努めます。</li>
+          <li><span style="font-weight:700">第三者サービスの利用：</span>本サービスの提供にあたり、AIプロバイダ、クラウド、ホスティング、各種SaaS等の第三者サービスを利用する場合があります。これらの利用料金・利用規約・稼働状況については、原則としてユーザーと当該提供事業者との間の条件に従うものとし、当社はその内容および中断・変更について責任を負いません。</li>
+        </ol>
+      </div>
+
+      <!-- Article 7 -->
+      <div style="margin-top:44px">
+        <h2 style="font-size:clamp(18px,2.4vw,23px);font-weight:900;padding-bottom:12px;border-bottom:2px solid var(--navy)">第7条（事例の公表およびロゴの使用）</h2>
+        <ol style="margin-top:20px;padding-left:22px;font-size:15px;line-height:2;color:var(--ink)">
+          <li style="margin-bottom:12px">当社は、ユーザーが本サービスを利用している事実を、当社の公式ウェブサイト・販売促進資料・プレスリリース等において、ユーザーの名称・商標・ロゴマーク（以下「ロゴ等」）を表示して、導入事例・実績として公表できるものとします。</li>
+          <li style="margin-bottom:12px">ユーザーは、前項に基づく公表またはロゴ等の使用について、当社所定の方法によりあらかじめ申し出ることにより、その全部または一部を拒否（オプトアウト）することができます。</li>
+          <li>当社は、ユーザーのロゴ等を使用するにあたり、ブランドガイドライン等の指定がある場合はこれに準拠し、ユーザーの社会的信用を損なわないよう適切に使用・管理します。</li>
+        </ol>
+      </div>
+
+      <!-- Article 8 -->
+      <div style="margin-top:44px">
+        <h2 style="font-size:clamp(18px,2.4vw,23px);font-weight:900;padding-bottom:12px;border-bottom:2px solid var(--navy)">第8条（同意の撤回・本規約の改定）</h2>
+        <ol style="margin-top:20px;padding-left:22px;font-size:15px;line-height:2;color:var(--ink)">
+          <li style="margin-bottom:12px">ユーザーは、当社の問い合わせ窓口を通じて、いつでも本規約に関する同意を撤回することができます。ただし、撤回以降は本サービス（AIによる自動設定支援等）の提供を受けられなくなります。</li>
+          <li>当社は、法令の改正やサービス内容の変更に応じて本規約を改定することがあります。重要な変更を行う場合は、当社ウェブサイト等で周知します。</li>
+        </ol>
+      </div>
+
+      <!-- contact -->
+      <div style="margin-top:44px;background:var(--alt);border-radius:4px;padding:28px 28px">
+        <h3 style="font-size:15px;font-weight:700">お問い合わせ窓口</h3>
+        <p style="margin-top:12px;font-size:14.5px;color:var(--muted);line-height:2">株式会社IKKI<br>東京都渋谷区神南1-11-4 FPGリンクス神南5階<br>contact@ikki-inc.com</p>
+      </div>
+
+      <p style="margin-top:28px;font-size:12.5px;color:var(--muted);line-height:1.9">※本規約はサービス内容を分かりやすくお伝えするための案文です。実際のご契約・掲載にあたっては、貴社の顧問弁護士等による最終確認をおすすめします。</p>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer style="background:var(--navy-deep);color:#cdd9e8;padding:48px 24px">
+    <div style="max-width:1320px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px">
+      <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:14px">
+        <img src="assets/ikki-logo-white.png" alt="IKKI" style="height:28px;width:auto;display:block">
+        <span style="font-size:13px;color:#9db8d6">株式会社IKKI</span>
+      </a>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:24px">
+        <a href="index.html" style="font-size:12px;color:#9db8d6;text-decoration:none;letter-spacing:.04em" style-hover="color:#fff">トップページ</a>
+        <a href="index.html#privacy" style="font-size:12px;color:#9db8d6;text-decoration:none;letter-spacing:.04em" style-hover="color:#fff">個人情報の取り扱いについて</a>
+        <p style="font-size:12px;color:#8ba4c2;letter-spacing:.04em">© Copyright 2026 IKKI Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { isMobile: false, menuOpen: false };
+  componentDidMount() {
+    this.onResize = () => {
+      const m = window.innerWidth < 1080;
+      if (m !== this.state.isMobile) this.setState({ isMobile: m, menuOpen: false });
+    };
+    this.onResize();
+    window.addEventListener('resize', this.onResize);
+    this.setupReveal();
+  }
+  setupReveal() {
+    if (typeof IntersectionObserver === 'undefined') return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const EASE = 'cubic-bezier(.16,.84,.28,1)';
+    const targets = [];
+    document.querySelectorAll('section, header').forEach((sec) => {
+      const box = sec.querySelector(':scope > div') || sec;
+      Array.prototype.forEach.call(box.children, (el, i) => {
+        el.dataset.revealStep = String(Math.min(i, 6));
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(26px)';
+        el.style.transition = 'opacity .85s ' + EASE + ', transform .85s ' + EASE;
+        targets.push(el);
+      });
+    });
+    const reveal = (el) => {
+      el.style.transitionDelay = (Number(el.dataset.revealStep || 0) * 0.11) + 's';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    };
+    this.io = new IntersectionObserver((ents) => {
+      ents.forEach((e) => { if (e.isIntersecting) { reveal(e.target); this.io.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -12% 0px' });
+    targets.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < (window.innerHeight || 800) * 0.9) reveal(el);
+      else this.io.observe(el);
+    });
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); if (this.io) this.io.disconnect(); }
+  renderVals() {
+    return {
+      showDesktopNav: !this.state.isMobile,
+      showMobileBtn: this.state.isMobile,
+      mobileMenuOpen: this.state.isMobile && this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8Q4H7R12XG"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8Q4H7R12XG');</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  a{color:inherit}
+  .nav-dd{position:relative}
+  .nav-dd-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:280px;background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 18px 44px -14px rgba(20,43,74,.32);padding:8px;opacity:0;visibility:hidden;transition:opacity .2s ease,transform .2s ease;z-index:60}
+  .nav-dd:hover .nav-dd-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(4px)}
+  .nav-dd-caret{transition:transform .2s ease}
+  .nav-dd:hover .nav-dd-caret{transform:rotate(180deg)}
+  .nav-dd-item{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:3px;text-decoration:none;transition:background .18s ease}
+  .nav-dd-item:hover{background:var(--tint)}
+  .nav-dd-item .ico{width:34px;height:34px;border-radius:3px;background:var(--navy);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
+  .nav-dd-item:hover .ico{background:var(--accent)}
+</style>
+<script src="./tina-widget-embed.js"></script>
+</helmet>
+
+<div style="--navy:#1c3c66;--navy-deep:#142b4a;--accent:#dc5430;--accent-deep:#c34522;--ink:#16181c;--bg:#ffffff;--alt:#f6f8fa;--line:#e6e9ee;--muted:#5b6573;--tint:#eef2f7;--serif:'Shippori Mincho',serif;font-family:'Noto Sans JP',sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;overflow-x:hidden">
+
+  <!-- ===================== NAV ===================== -->
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)">
+    <div style="max-width:1320px;margin:0 auto;padding:0 24px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:12px">
+        <img src="assets/ikki-logo-dark.png" alt="IKKI" style="height:30px;width:auto;display:block">
+        <span style="font-size:11px;letter-spacing:.18em;color:var(--muted);font-weight:700">株式会社IKKI</span>
+      </a>
+      <sc-if value="{{ showDesktopNav }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;align-items:center;gap:28px">
+          <div class="nav-dd" style="display:flex;align-items:center">
+            <a href="index.html#services" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink);display:inline-flex;align-items:center;gap:5px">サービス<svg class="nav-dd-caret" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></a>
+            <div class="nav-dd-menu">
+              <a class="nav-dd-item" href="service-technology.html">
+                <span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></span>
+                <span><span style="display:block;font-size:14px;font-weight:700;color:var(--ink)">テクノロジー支援</span><span style="display:block;font-size:11.5px;color:var(--muted);margin-top:1px">Salesforce・SFA/CRM・AI活用</span></span>
+              </a>
+              <a class="nav-dd-item" href="service-hands-on.html">
+                <span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></span>
+                <span><span style="display:block;font-size:14px;font-weight:700;color:var(--ink)">ハンズオン営業支援</span><span style="display:block;font-size:11.5px;color:var(--muted);margin-top:1px">商談レビュー・質問力/対応力強化</span></span>
+              </a>
+              <a class="nav-dd-item" href="service-management.html">
+                <span class="ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                <span><span style="display:block;font-size:14px;font-weight:700;color:var(--ink)">マネジメント・育成支援</span><span style="display:block;font-size:11.5px;color:var(--muted);margin-top:1px">KPI策定・会議同席・GTM</span></span>
+              </a>
+            </div>
+          </div>
+          <a href="index.html#why" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink)">強み</a>
+          <a href="index.html#whitepaper" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink)">資料ダウンロード</a>
+          <a href="index.html#faq" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink)">よくある質問</a>
+          <a href="company.html" style="text-decoration:none;font-size:14px;font-weight:700;color:var(--navy)">会社概要</a>
+          <a href="https://note.com/ideal_avocet6585" target="_blank" rel="noopener noreferrer" style="text-decoration:none;font-size:14px;font-weight:500;color:var(--ink);display:inline-flex;align-items:center;gap:4px">note<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
+          <a href="index.html#contact" style="text-decoration:none;font-size:14px;font-weight:700;color:#fff;background:var(--accent);padding:11px 22px;border-radius:2px" style-hover="background:var(--accent-deep)">無料相談</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showMobileBtn }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-label="メニュー" style="border:none;background:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:8px">
+          <span style="width:24px;height:2px;background:var(--ink);display:block"></span>
+          <span style="width:24px;height:2px;background:var(--ink);display:block"></span>
+          <span style="width:24px;height:2px;background:var(--ink);display:block"></span>
+        </button>
+      </sc-if>
+    </div>
+    <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid var(--line);background:#fff;padding:12px 24px 20px;display:flex;flex-direction:column;gap:4px">
+        <a href="index.html#services" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">サービス</a>
+        <a href="service-technology.html" onClick="{{ closeMenu }}" style="text-decoration:none;padding:10px 0 10px 16px;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)">└ テクノロジー支援</a>
+        <a href="service-hands-on.html" onClick="{{ closeMenu }}" style="text-decoration:none;padding:10px 0 10px 16px;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)">└ ハンズオン営業支援</a>
+        <a href="service-management.html" onClick="{{ closeMenu }}" style="text-decoration:none;padding:10px 0 10px 16px;border-bottom:1px solid var(--line);font-size:14px;color:var(--muted)">└ マネジメント・育成支援</a>
+        <a href="index.html#why" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">強み</a>
+        <a href="index.html#whitepaper" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">資料ダウンロード</a>
+        <a href="index.html#faq" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">よくある質問</a>
+        <a href="company.html" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:700;color:var(--navy)">会社概要</a>
+        <a href="https://note.com/ideal_avocet6585" target="_blank" rel="noopener noreferrer" onClick="{{ closeMenu }}" style="text-decoration:none;padding:12px 0;border-bottom:1px solid var(--line);font-weight:500">note ↗</a>
+        <a href="index.html#contact" onClick="{{ closeMenu }}" style="text-decoration:none;margin-top:10px;text-align:center;font-weight:700;color:#fff;background:var(--navy);padding:14px;border-radius:2px">無料相談</a>
+      </div>
+    </sc-if>
+  </nav>
+
+  <!-- ===================== PAGE HEADER ===================== -->
+  <header style="background:var(--navy);color:#fff;padding:clamp(48px,7vw,84px) 24px">
+    <div style="max-width:1320px;margin:0 auto">
+      <p style="font-size:13px;letter-spacing:.3em;font-weight:700;color:#9db8d6;text-transform:uppercase">Company</p>
+      <div style="width:56px;height:4px;background:#fff;margin:22px 0 20px"></div>
+      <h1 style="font-weight:900;font-size:clamp(32px,5.5vw,56px);line-height:1.2;letter-spacing:-.01em">会社概要</h1>
+      <p style="margin-top:18px;font-size:13px;color:#9db8d6"><a href="index.html" style="text-decoration:none;color:#9db8d6" style-hover="color:#fff">ホーム</a><span style="margin:0 10px;opacity:.5">/</span>会社概要</p>
+    </div>
+  </header>
+
+  <!-- ===================== COMPANY TABLE ===================== -->
+  <section style="padding:clamp(56px,8vw,104px) 24px">
+    <div style="max-width:1320px;margin:0 auto">
+      <div style="border:1px solid var(--line);border-radius:2px;overflow:hidden">
+        <div style="display:flex;border-bottom:1px solid var(--line)"><span style="width:180px;flex-shrink:0;background:var(--alt);padding:22px 26px;font-size:14px;font-weight:700;color:var(--navy)">社名</span><span style="padding:22px 26px;font-size:15px;font-weight:700">株式会社IKKI</span></div>
+        <div style="display:flex;border-bottom:1px solid var(--line)"><span style="width:180px;flex-shrink:0;background:var(--alt);padding:22px 26px;font-size:14px;font-weight:700;color:var(--navy)">代表者</span><span style="padding:22px 26px;font-size:15px;font-weight:700">三浦 浩幸（代表取締役）</span></div>
+        <div style="display:flex;border-bottom:1px solid var(--line)"><span style="width:180px;flex-shrink:0;background:var(--alt);padding:22px 26px;font-size:14px;font-weight:700;color:var(--navy)">設立</span><span style="padding:22px 26px;font-size:15px;font-weight:700">2026年7月</span></div>
+        <div style="display:flex;border-bottom:1px solid var(--line)"><span style="width:180px;flex-shrink:0;background:var(--alt);padding:22px 26px;font-size:14px;font-weight:700;color:var(--navy)">資本金</span><span style="padding:22px 26px;font-size:15px;font-weight:700">9,000,000円</span></div>
+        <div style="display:flex;border-bottom:1px solid var(--line)"><span style="width:180px;flex-shrink:0;background:var(--alt);padding:22px 26px;font-size:14px;font-weight:700;color:var(--navy)">所在地</span><span style="padding:22px 26px;font-size:15px;font-weight:700">〒150-0041<br>東京都渋谷区神南1-11-4<br>FPGリンクス神南 5階</span></div>
+        <div style="display:flex;border-bottom:1px solid var(--line)"><span style="width:180px;flex-shrink:0;background:var(--alt);padding:22px 26px;font-size:14px;font-weight:700;color:var(--navy)">事業内容</span><span style="padding:22px 26px;font-size:15px;font-weight:700;line-height:1.9">営業組織・顧客接点強化コンサルティング<br>人材育成・戦略策定及び実行支援<br>SFA/CRM/AIを中心としたシステム構築及び活用支援</span></div>
+        <div style="display:flex;border-bottom:1px solid var(--line)"><span style="width:180px;flex-shrink:0;background:var(--alt);padding:22px 26px;font-size:14px;font-weight:700;color:var(--navy)">支援形態</span><span style="padding:22px 26px;font-size:15px;font-weight:700">ハンズオン型（伴走支援型）</span></div>
+        <div style="display:flex"><span style="width:180px;flex-shrink:0;background:var(--alt);padding:22px 26px;font-size:14px;font-weight:700;color:var(--navy)">支援実績</span><span style="padding:22px 26px;font-size:15px;font-weight:700;color:var(--navy)">数千社以上</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <section style="position:relative;background:var(--navy);color:#fff;padding:clamp(60px,9vw,110px) 24px;overflow:hidden">
+    <div style="max-width:1320px;margin:0 auto;position:relative">
+      <h2 style="font-family:var(--serif);font-weight:700;font-size:clamp(28px,5vw,52px);line-height:1.25">こんな時代に、<br>人間讃歌を。</h2>
+      <p style="margin-top:24px;max-width:560px;font-size:clamp(15px,1.8vw,18px);color:#cdd9e8;line-height:1.9">まずは無償のヒアリングから。現場に入り、御社の営業に火を灯させてください。</p>
+      <div style="margin-top:36px;display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+        <a href="index.html#contact" style="text-decoration:none;display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#fff;padding:17px 36px;font-weight:700;font-size:15px;border-radius:2px" style-hover="background:var(--accent-deep)">無料相談を申し込む<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <a href="mailto:contact@ikki-inc.com" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:700;color:#fff;letter-spacing:.02em"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>contact@ikki-inc.com</a>
+      </div>
+    </div>
+    <div style="position:absolute;top:clamp(30px,6vw,70px);right:max(24px,calc((100vw - 1160px)/2 + 24px));writing-mode:vertical-rl;font-family:var(--serif);font-weight:700;font-size:clamp(24px,4vw,44px);letter-spacing:.18em;color:rgba(255,255,255,.92)">火を、灯す。</div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer style="background:var(--navy-deep);color:#cdd9e8;padding:48px 24px">
+    <div style="max-width:1320px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px">
+      <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:14px">
+        <img src="assets/ikki-logo-white.png" alt="IKKI" style="height:28px;width:auto;display:block">
+        <span style="font-size:13px;color:#9db8d6">株式会社IKKI</span>
+      </a>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:24px">
+        <a href="terms.html" style="font-size:12px;color:#9db8d6;text-decoration:none;letter-spacing:.04em" style-hover="color:#fff">AI活用支援 利用規約</a>
+        <a href="index.html#privacy" style="font-size:12px;color:#9db8d6;text-decoration:none;letter-spacing:.04em" style-hover="color:#fff">個人情報の取り扱いについて</a>
+        <p style="font-size:12px;color:#8ba4c2;letter-spacing:.04em">© Copyright 2026 IKKI Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { isMobile: false, menuOpen: false };
+
+  componentDidMount() {
+    this.onResize = () => {
+      const m = window.innerWidth < 1080;
+      if (m !== this.state.isMobile) this.setState({ isMobile: m, menuOpen: false });
+    };
+    this.onResize();
+    window.addEventListener('resize', this.onResize);
+    this.setupReveal();
+  }
+  setupReveal() {
+    if (typeof IntersectionObserver === 'undefined') return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const EASE = 'cubic-bezier(.16,.84,.28,1)';
+    const targets = [];
+    document.querySelectorAll('section, header').forEach((sec) => {
+      const box = sec.querySelector(':scope > div') || sec;
+      Array.prototype.forEach.call(box.children, (el, i) => {
+        el.dataset.revealStep = String(Math.min(i, 6));
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(26px)';
+        el.style.transition = 'opacity .85s ' + EASE + ', transform .85s ' + EASE;
+        targets.push(el);
+      });
+    });
+    const reveal = (el) => {
+      el.style.transitionDelay = (Number(el.dataset.revealStep || 0) * 0.11) + 's';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    };
+    this.io = new IntersectionObserver((ents) => {
+      ents.forEach((e) => { if (e.isIntersecting) { reveal(e.target); this.io.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -12% 0px' });
+    targets.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < (window.innerHeight || 800) * 0.9) reveal(el);
+      else this.io.observe(el);
+    });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    if (this.io) this.io.disconnect();
+  }
+
+  renderVals() {
+    return {
+      showDesktopNav: !this.state.isMobile,
+      showMobileBtn: this.state.isMobile,
+      mobileMenuOpen: this.state.isMobile && this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>
