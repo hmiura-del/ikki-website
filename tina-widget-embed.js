@@ -69,8 +69,10 @@
         "top:8px",
         "right:8px",
         "z-index:2001",
-        "width:26px",
-        "height:26px",
+        "width:34px",
+        "height:34px",
+        "pointer-events:auto",
+        "touch-action:manipulation",
         "border-radius:50%",
         "border:none",
         "cursor:pointer",
@@ -98,10 +100,15 @@
         minimizedButton.style.display = min ? "flex" : "none";
     }
 
-    collapseBtn.addEventListener("click", function () {
+    // pointerdown を使うことで、iframe にフォーカスが移っている状態でも 1 クリックで反応する
+    collapseBtn.addEventListener("pointerdown", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         setMinimized(true);
     });
-    minimizedButton.addEventListener("click", function () {
+    minimizedButton.addEventListener("pointerdown", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         setMinimized(false);
     });
 
