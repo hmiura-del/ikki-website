@@ -114,12 +114,13 @@
         <p style="margin-top:12px;font-size:14.5px;color:var(--muted);line-height:1.9">7領域のスコア内訳と、優先して着手すべき領域・具体策を今すぐ表示します。送付先を入力してください。</p>
 
         <form onSubmit="{{ onGateSubmit }}" style="margin-top:28px;text-align:left;background:var(--alt);border:1px solid var(--line);border-radius:4px;padding:24px 26px">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           <label style="font-size:12.5px;font-weight:700;color:var(--ink)">メールアドレス <span style="color:var(--accent)">*</span></label>
           <input type="email" required name="email" placeholder="taro@example.com" style="margin-top:7px;width:100%;border:1px solid #ccd8e8;border-radius:3px;padding:11px 13px;font-size:14px;font-family:inherit">
           <label style="display:block;margin-top:16px;font-size:12.5px;font-weight:700;color:var(--ink)">会社名（任意）</label>
           <input type="text" name="company" placeholder="株式会社〇〇" style="margin-top:7px;width:100%;border:1px solid #ccd8e8;border-radius:3px;padding:11px 13px;font-size:14px;font-family:inherit">
           <button type="submit" style="margin-top:20px;width:100%;border:none;cursor:pointer;font-size:14.5px;font-weight:700;color:#fff;background:var(--accent);padding:14px;border-radius:2px" style-hover="background:var(--accent-deep)">診断結果を見る</button>
-          <p style="margin-top:12px;font-size:11px;color:var(--muted);line-height:1.7">※本診断はダミー機能です。入力内容は送信・保存されません。</p>
+          <p style="margin-top:12px;font-size:11px;color:var(--muted);line-height:1.7">※ご入力いただいた情報と診断結果は、当社からのご連絡のみに利用します。</p>
         </form>
       </div>
     </sc-if>
@@ -267,8 +268,45 @@ class Component extends DCLogic {
     if (this.state.qIndex > 0) this.setState({ qIndex: this.state.qIndex - 1 });
   };
 
+  // 診断結果と入力アドレスを contact@ikki-inc.com へ送信（FormSubmit 経由）
+  sendDiagnosis(form) {
+    try {
+      const data = new FormData(form);
+      data.append('_captcha', 'false');
+      data.append('_subject', 'IKKIサイト 営業スキル診断の結果');
+      data.append('_template', 'table');
+
+      const answers = this.state.answers;
+      const domainScores = {};
+      DOMAINS.forEach((d) => {
+        const s = answers.filter((a) => a && a.domainKey === d.key).map((a) => a.score);
+        const avg = s.length ? s.reduce((x, v) => x + v, 0) / s.length : 0;
+        domainScores[d.key] = avg;
+        data.append(d.label, levelOf(avg || 1).label + '（平均 ' + avg.toFixed(2) + ' / 4）');
+      });
+
+      const keys = Object.keys(domainScores);
+      const overall = keys.reduce((x, k) => x + domainScores[k], 0) / (keys.length || 1);
+      data.append('総合レベル', levelOf(overall).label + '（平均 ' + overall.toFixed(2) + ' / 4）');
+
+      const weak = DOMAINS.slice().sort((a, b) => domainScores[a.key] - domainScores[b.key]).slice(0, 2);
+      data.append('優先着手領域', weak.map((d) => d.label + '（推奨：' + d.service + '）').join(' ／ '));
+
+      FLAT.forEach((q, i) => {
+        const a = answers[i];
+        const picked = a ? q.options[a.score - 1] : '未回答';
+        data.append('Q' + (i + 1) + '. ' + q.q, picked);
+      });
+
+      fetch('https://formsubmit.co/ajax/contact@ikki-inc.com', {
+        method: 'POST', body: data, headers: { Accept: 'application/json' },
+      }).catch(() => {});
+    } catch (err) {}
+  }
+
   onGateSubmit = (e) => {
     e.preventDefault();
+    this.sendDiagnosis(e.target);
     this.setState({ screen: 'result' });
   };
 
