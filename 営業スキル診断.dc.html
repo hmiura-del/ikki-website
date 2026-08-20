@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{-webkit-font-smoothing:antialiased}
+  ::selection{background:#dc5430;color:#fff}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  .qcard{animation:fadeUp .35s ease both}
+  .opt{cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .1s ease}
+  .opt:hover{border-color:#1c3c66 !important;background:#eef2f7 !important}
+  .opt:active{transform:scale(.99)}
+  .barfill{transition:width .6s ease}
+</style>
+<script src="./tina-widget-embed.js"></script>
+</helmet>
+
+<div ref="{{ setRoot }}" style="--navy:#1c3c66;--navy-deep:#14293f;--accent:#dc5430;--accent-deep:#c14322;--ink:#1a2332;--muted:#6b7684;--line:#e2e6ec;--alt:#f6f8fa;--tint:#eef2f7;--serif:'Shippori Mincho',serif;font-family:'Noto Sans JP',sans-serif;color:var(--ink);background:#fff;min-height:100vh">
+
+  <!-- ===================== NAV ===================== -->
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)">
+    <div style="max-width:900px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between">
+      <a href="IKKI コーポレートサイト.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:10px">
+        <span style="font-family:var(--serif);font-weight:800;font-size:19px;color:var(--navy);letter-spacing:.06em">IKKI</span>
+        <span style="width:1px;height:16px;background:var(--line)"></span>
+        <span style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.06em">営業スキル診断</span>
+      </a>
+      <a href="IKKI コーポレートサイト.dc.html" style="text-decoration:none;font-size:13px;font-weight:700;color:var(--muted);display:inline-flex;align-items:center;gap:5px">
+        サイトに戻る
+      </a>
+    </div>
+  </nav>
+
+  <main style="max-width:900px;margin:0 auto;padding:clamp(28px,5vw,56px) 24px 80px">
+
+    <!-- ===================== INTRO ===================== -->
+    <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+      <div class="qcard">
+        <p style="font-size:12px;letter-spacing:.24em;font-weight:700;color:var(--accent);text-transform:uppercase">Free Diagnosis</p>
+        <h1 style="margin-top:16px;font-weight:900;font-size:clamp(28px,4.2vw,42px);letter-spacing:-.01em;line-height:1.35">あなたの営業組織は、<br>いま何レベルですか？</h1>
+        <p style="margin-top:18px;font-size:15px;color:var(--muted);line-height:2;max-width:620px">全21問・約5分。リード獲得からSFA・CRM活用、型化・仕組み化まで、7つの領域で営業組織の成熟度を診断します。結果は「Lv.1 これから」〜「Lv.4 仕組み化済み」の4段階で可視化されます。</p>
+
+        <div style="margin-top:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px">
+          <sc-for list="{{ domainSummaries }}" as="d" hint-placeholder-count="7">
+            <div style="background:var(--alt);border:1px solid var(--line);border-radius:4px;padding:14px 16px">
+              <p style="font-size:10px;font-weight:700;color:var(--navy);letter-spacing:.1em">0{{ d.n }}</p>
+              <p style="margin-top:4px;font-size:13.5px;font-weight:700">{{ d.label }}</p>
+            </div>
+          </sc-for>
+        </div>
+
+        <button onClick="{{ startQuiz }}" style="margin-top:36px;border:none;cursor:pointer;font-size:15px;font-weight:700;color:#fff;background:var(--accent);padding:16px 34px;border-radius:2px;display:inline-flex;align-items:center;gap:8px" style-hover="background:var(--accent-deep)">
+          診断をはじめる（無料）
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+        <p style="margin-top:14px;font-size:12px;color:var(--muted)">※ 診断結果の詳細レポートはメールアドレスのご入力後に表示されます。</p>
+      </div>
+    </sc-if>
+
+    <!-- ===================== QUIZ ===================== -->
+    <sc-if value="{{ isQuiz }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:16px">
+          <p style="font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.06em">{{ currentQ.domainLabel }}</p>
+          <p style="font-size:12px;font-weight:700;color:var(--muted)">{{ progressLabel }}</p>
+        </div>
+        <div style="margin-top:10px;height:6px;background:var(--line);border-radius:999px;overflow:hidden">
+          <div class="barfill" style="height:100%;background:var(--accent);width:{{ progressPct }}%"></div>
+        </div>
+
+        <sc-for list="{{ questions }}" as="qq" hint-placeholder-count="21">
+          <sc-if value="{{ qq.isCurrent }}" hint-placeholder-val="{{ false }}">
+            <div class="qcard" style="margin-top:36px">
+              <h2 style="font-weight:800;font-size:clamp(19px,2.6vw,25px);line-height:1.6">{{ qq.q }}</h2>
+              <div style="margin-top:24px;display:flex;flex-direction:column;gap:10px">
+                <sc-for list="{{ qq.options }}" as="opt" hint-placeholder-count="4">
+                  <div class="opt" onClick="{{ opt.select }}" style="border:1.5px solid var(--line);border-radius:4px;padding:16px 18px;display:flex;align-items:flex-start;gap:12px;background:#fff">
+                    <span style="flex-shrink:0;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--navy);color:var(--navy);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">{{ opt.letter }}</span>
+                    <span style="font-size:14.5px;line-height:1.7;padding-top:1px">{{ opt.text }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </sc-for>
+
+        <sc-if value="{{ hasPrev }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ prevQuestion }}" style="margin-top:28px;border:none;background:none;cursor:pointer;font-size:13px;font-weight:700;color:var(--muted);display:inline-flex;align-items:center;gap:6px">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            前の質問へ
+          </button>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ===================== GATE ===================== -->
+    <sc-if value="{{ isGate }}" hint-placeholder-val="{{ false }}">
+      <div class="qcard" style="max-width:520px;margin:0 auto;text-align:center;padding-top:20px">
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--tint);display:flex;align-items:center;justify-content:center;margin:0 auto">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </div>
+        <h2 style="margin-top:22px;font-weight:900;font-size:clamp(21px,3vw,26px)">診断が完了しました</h2>
+        <p style="margin-top:12px;font-size:14.5px;color:var(--muted);line-height:1.9">7領域のスコア内訳と、優先して着手すべき領域・具体策を今すぐ表示します。送付先を入力してください。</p>
+
+        <form onSubmit="{{ onGateSubmit }}" style="margin-top:28px;text-align:left;background:var(--alt);border:1px solid var(--line);border-radius:4px;padding:24px 26px">
+          <label style="font-size:12.5px;font-weight:700;color:var(--ink)">メールアドレス <span style="color:var(--accent)">*</span></label>
+          <input type="email" required name="email" placeholder="taro@example.com" style="margin-top:7px;width:100%;border:1px solid #ccd8e8;border-radius:3px;padding:11px 13px;font-size:14px;font-family:inherit">
+          <label style="display:block;margin-top:16px;font-size:12.5px;font-weight:700;color:var(--ink)">会社名（任意）</label>
+          <input type="text" name="company" placeholder="株式会社〇〇" style="margin-top:7px;width:100%;border:1px solid #ccd8e8;border-radius:3px;padding:11px 13px;font-size:14px;font-family:inherit">
+          <button type="submit" style="margin-top:20px;width:100%;border:none;cursor:pointer;font-size:14.5px;font-weight:700;color:#fff;background:var(--accent);padding:14px;border-radius:2px" style-hover="background:var(--accent-deep)">診断結果を見る</button>
+          <p style="margin-top:12px;font-size:11px;color:var(--muted);line-height:1.7">※本診断はダミー機能です。入力内容は送信・保存されません。</p>
+        </form>
+      </div>
+    </sc-if>
+
+    <!-- ===================== RESULT ===================== -->
+    <sc-if value="{{ isResult }}" hint-placeholder-val="{{ false }}">
+      <div class="qcard">
+        <p style="font-size:12px;letter-spacing:.24em;font-weight:700;color:var(--accent);text-transform:uppercase">Result</p>
+        <h2 style="margin-top:14px;font-weight:900;font-size:clamp(24px,3.6vw,34px)">診断結果</h2>
+        <p style="margin-top:10px;font-size:14px;color:var(--muted)">総合スコア　<span style="font-weight:800;color:var(--navy);font-size:17px">{{ overallLevel.label }}</span></p>
+
+        <div style="margin-top:32px;display:flex;flex-direction:column;gap:14px">
+          <sc-for list="{{ domainResults }}" as="d" hint-placeholder-count="7">
+            <div style="border:1px solid var(--line);border-radius:4px;padding:18px 20px">
+              <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px">
+                <p style="font-size:14.5px;font-weight:700">{{ d.label }}</p>
+                <span style="font-size:11.5px;font-weight:700;color:#fff;background:{{ d.levelColor }};padding:4px 12px;border-radius:999px">{{ d.levelLabel }}</span>
+              </div>
+              <div style="margin-top:10px;height:8px;background:var(--alt);border-radius:999px;overflow:hidden">
+                <div class="barfill" style="height:100%;background:{{ d.levelColor }};width:{{ d.pct }}%"></div>
+              </div>
+              <p style="margin-top:10px;font-size:12.5px;color:var(--muted);line-height:1.8">{{ d.advice }}</p>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- priority -->
+        <div style="margin-top:40px;background:var(--navy);color:#fff;border-radius:4px;padding:clamp(24px,4vw,36px)">
+          <p style="font-size:11px;letter-spacing:.2em;font-weight:700;color:#9db8d6">PRIORITY</p>
+          <h3 style="margin-top:12px;font-weight:900;font-size:clamp(18px,2.4vw,23px)">優先して着手すべき領域</h3>
+          <div style="margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+            <sc-for list="{{ weakDomains }}" as="d" hint-placeholder-count="2">
+              <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:3px;padding:18px 20px">
+                <p style="font-size:13.5px;font-weight:700">{{ d.label }}</p>
+                <p style="margin-top:6px;font-size:11.5px;color:#ffd9b0;font-weight:700">推奨サービス：{{ d.service }}</p>
+                <p style="margin-top:8px;font-size:12.5px;color:#cdd9e8;line-height:1.8">{{ d.advice }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:44px;text-align:center;background:var(--alt);border:1px solid var(--line);border-radius:4px;padding:clamp(28px,4vw,44px)">
+          <h3 style="font-weight:900;font-size:clamp(19px,2.6vw,24px)">この結果について、詳しく相談する</h3>
+          <p style="margin-top:10px;font-size:14px;color:var(--muted);line-height:1.9">診断結果をもとに、現場の状況をヒアリングします。まずは無償のご相談から。</p>
+          <a href="IKKI コーポレートサイト.dc.html#contact" style="margin-top:22px;display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:15px;font-weight:700;color:#fff;background:var(--accent);padding:15px 32px;border-radius:2px" style-hover="background:var(--accent-deep)">
+            無料相談を申し込む
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <div>
+            <button onClick="{{ restart }}" style="margin-top:20px;border:none;background:none;cursor:pointer;font-size:12.5px;font-weight:700;color:var(--muted);text-decoration:underline">もう一度診断する</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+  </main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const DOMAINS = [
+  { key:'lead', label:'リード獲得・アプローチ', service:'AI SDR / アプローチ設計支援',
+    questions:[
+      { q:'新規リードへの初回アプローチは、どのように行っていますか？', options:['まずは幅広くリストに電話・メールでアプローチしている','ある程度ターゲットを絞ってアプローチしている','ペルソナ・ICPを定義し、優先順位をつけてアプローチしている','ICPとトリガーイベントを掛け合わせた多チャネル戦略で、返信率を継続的に改善している'] },
+      { q:'アプローチメッセージは、どのように作っていますか？', options:['共通のテンプレートを軸に送っている','会社名など最低限をカスタマイズしている','相手の課題仮説に基づいてメッセージを個別化している','事業状況やトリガーから仮説をぶつけ、返信データを元に型を継続改善している'] },
+      { q:'紹介・リファラルは、どの程度活用できていますか？', options:['紹介はまだあまり発生していない','既存顧客から偶発的に紹介をもらうことがある','意図的に紹介を依頼する仕組みがある','紹介創出がプロセス化され、パイプラインの主要な流入源になっている'] },
+    ] },
+  { key:'hearing', label:'ヒアリング・課題発掘（SPIN）', service:'SPIN営業研修',
+    questions:[
+      { q:'商談序盤の質問設計は、どのようになっていますか？', options:['製品説明から入ることが多い','現状の課題をある程度聞いている','SPIN（状況・問題・示唆・解決質問）を意識して構成している','示唆質問で課題の重要性を顧客自身に言語化させ、意思決定を後押ししている'] },
+      { q:'顧客が語った課題を、どこまで掘り下げていますか？', options:['話してくれた課題を、そのまま受け取ることが多い','深掘りの質問を1〜2回するようにしている','課題の背景・影響範囲まで深掘りしている','顧客も気づいていない潜在課題を、仮説提示によって引き出している'] },
+      { q:'意思決定プロセス・決裁者の把握状況は？', options:['決裁者やプロセスまでは、まだ把握しきれていない','決裁者の名前くらいは聞いている','決裁プロセス・関係者・タイムラインを把握している','MEDDIC等のフレームで関係者ごとの関与度まで管理している'] },
+    ] },
+  { key:'proposal', label:'提案設計・仮説構築（チャレンジャー）', service:'チャレンジャーセリング研修',
+    questions:[
+      { q:'提案の切り口は、どのようなスタイルですか？', options:['製品機能を中心に説明している','顧客の要望に沿った提案をしている','業界動向や競合状況を踏まえた仮説提案をしている','顧客の常識を再定義するチャレンジャー型の提案で議論をリードしている'] },
+      { q:'ROI・投資対効果は、どのように提示していますか？', options:['ROIはまだ特に提示していない','一般的な効果事例を紹介する程度','顧客固有の数字でROI試算を作成している','顧客と一緒にROIモデルを作り込み、社内稟議の武器にしてもらっている'] },
+      { q:'競合との差別化は、どのように伝えていますか？', options:['聞かれた時に答える程度','自社の強みを説明することが多い','顧客の評価軸を理解した上で差別化ポイントを伝えている','顧客の評価軸そのものを自社優位に再定義している'] },
+    ] },
+  { key:'closing', label:'交渉・クロージング', service:'商談同行・ロールプレイ支援',
+    questions:[
+      { q:'クロージングのタイミングは、どう決めていますか？', options:['様子を見ながら、切り出すタイミングを探っている','見積提示後に反応を待つことが多い','商談の各段階で次のステップを合意しながら進めている','商談序盤から逆算してクロージングを設計している'] },
+      { q:'価格交渉への対応は、どのレベルですか？', options:['値引き要求には応じることが多い','一旦持ち帰って上司に相談している','価値を再提示しながら交渉する材料を持っている','BATNAを踏まえた交渉戦略があり、価格以外の条件でも着地させられる'] },
+      { q:'失注・保留案件への対応は？', options:['失注したら、そこで一区切りにしている','一応理由を聞いて記録している','失注理由を分析し次の提案に活かしている','失注後もナーチャリングし、タイミングを見て再アプローチする仕組みがある'] },
+    ] },
+  { key:'pipeline', label:'パイプライン管理・フォーキャスト精度', service:'各種SFAの運用整備支援',
+    questions:[
+      { q:'パイプラインの可視化状況は？', options:['Excelや頭の中で管理している','SFAには入力しているが、更新頻度にはばらつきがある','案件のステージ定義に沿って日次で更新している','パイプラインが常にリアルタイムで正確で、チーム全体から信頼されている'] },
+      { q:'フォーキャストの精度は？', options:['感覚で報告することが多い','案件金額の合計をそのまま報告している','確度別に加重した数字で報告している','過去実績データに基づく予測モデルで高精度に着地を読めている'] },
+      { q:'停滞案件の管理は、どうしていますか？', options:['停滞案件には、あまり気づけていない','たまに見直す程度','停滞日数をルールで定義し、定期的に棚卸ししている','停滞の予兆を早期検知し、自動でアラート・打ち手が発動する仕組みがある'] },
+    ] },
+  { key:'sfdc', label:'SFA・CRM活用・データ活用', service:'各種SFA/CRMの導入・ダッシュボード構築',
+    questions:[
+      { q:'日々の入力習慣は？', options:['入力はあまり定着していない','言われた項目だけ入力している','商談後すぐに必要項目を入力する習慣がある','入力が自動・半自動化され、正確なデータが自然に溜まる仕組みがある'] },
+      { q:'レポート・ダッシュボードの活用状況は？', options:['レポートは、まだあまり見る機会がない','上司に言われた時に見る程度','自分の数字を定期的に自分で確認し行動を調整している','ダッシュボードを起点に日々の優先順位を意思決定している'] },
+      { q:'データに基づく振り返りは、どの程度していますか？', options:['感覚的に振り返ることが多い','月次の数字は見るが、分析までは踏み込めていない','商談化率・受注率などの指標で自分の傾向を把握している','データから自分の勝ちパターンを言語化し、再現性を持って実行している'] },
+    ] },
+  { key:'model', label:'型化・仕組み化', service:'営業の型化・営業プロセス設計コンサル',
+    questions:[
+      { q:'営業プロセスの型は、どの程度整っていますか？', options:['個人のやり方に委ねられている','なんとなく共有された流れがある','部門・フェーズごとの役割分担（The Model型）が明確','型がドキュメント化され、新人でも一定水準で再現できる'] },
+      { q:'マーケ・CSなど他部門との連携は？', options:['他部門との連携は、まだこれから','必要な時だけ連絡を取っている','定例で情報共有する仕組みがある','共通のKPIと情報基盤で一気通貫に連携できている'] },
+      { q:'ナレッジの共有は、どうしていますか？', options:['ノウハウは個人の中にとどまっている','たまに口頭で共有している','勝ちパターンをドキュメント化し共有している','ナレッジが型として組織に組み込まれ、継続的に更新される仕組みがある'] },
+    ] },
+];
+
+const WHITEPAPERS = [
+  { key:'sfSetup', title:'Salesforceを AI でセットアップする方法' },
+  { key:'lwc', title:'おすすめLWCカタログ' },
+  { key:'questioning', title:'質問力を鍛える考え方' },
+  { key:'aioDecision', title:'AIが決裁者にいるぞ', flagship:true },
+  { key:'aiPricing', title:'AI時代の価格戦略' },
+  { key:'makuraKotoba', title:'提案に効く「枕詞」の使い方' },
+  { key:'maFunnel', title:'そのMA、ただの高級メルマガツールになっていませんか？' },
+];
+
+const LETTERS = ['A','B','C','D'];
+
+function levelOf(avg) {
+  if (avg < 1.75) return { label: 'Lv.1 これから', color: '#8a94a3' };
+  if (avg < 2.5) return { label: 'Lv.2 個人依存', color: '#3f6ba3' };
+  if (avg < 3.25) return { label: 'Lv.3 型がある', color: '#1c3c66' };
+  return { label: 'Lv.4 仕組み化済み', color: '#dc5430' };
+}
+
+const FLAT = DOMAINS.flatMap((d) => d.questions.map((q) => ({ ...q, domainKey: d.key, domainLabel: d.label })));
+
+class Component extends DCLogic {
+  state = { screen: 'intro', qIndex: 0, answers: [] };
+
+  startQuiz = () => this.setState({ screen: 'quiz', qIndex: 0, answers: [] });
+
+  selectOption = (idx) => {
+    const q = FLAT[this.state.qIndex];
+    const answers = this.state.answers.slice();
+    answers[this.state.qIndex] = { domainKey: q.domainKey, score: idx + 1 };
+    const next = this.state.qIndex + 1;
+    if (next < FLAT.length) {
+      this.setState({ answers, qIndex: next });
+    } else {
+      this.setState({ answers, screen: 'gate' });
+    }
+  };
+
+  prevQuestion = () => {
+    if (this.state.qIndex > 0) this.setState({ qIndex: this.state.qIndex - 1 });
+  };
+
+  onGateSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ screen: 'result' });
+  };
+
+  restart = () => this.setState({ screen: 'intro', qIndex: 0, answers: [] });
+
+  renderVals() {
+    const { screen, qIndex, answers } = this.state;
+    const currentQRaw = FLAT[qIndex] || FLAT[0];
+    const currentQ = {
+      q: currentQRaw.q,
+      domainLabel: currentQRaw.domainLabel,
+      options: currentQRaw.options.map((text, i) => ({ text, letter: LETTERS[i] })),
+    };
+
+    const domainResults = DOMAINS.map((d, di) => {
+      const scores = answers.filter((a) => a && a.domainKey === d.key).map((a) => a.score);
+      const avg = scores.length ? scores.reduce((s, v) => s + v, 0) / scores.length : 0;
+      const lvl = levelOf(avg || 1);
+      const pct = Math.max(6, (avg / 4) * 100);
+      const adviceMap = {
+        lead: '仮説ベースのメッセージ個別化と、紹介創出のプロセス化から着手すると成果が安定します。',
+        hearing: 'SPINの型を商談前チェックリスト化し、決裁プロセスの把握を商談序盤で徹底しましょう。',
+        proposal: '顧客の評価軸を理解した提案から、評価軸そのものを再定義する提案へ引き上げます。',
+        closing: '商談序盤から逆算したクロージング設計と、失注案件のナーチャリング体制が鍵です。',
+        pipeline: 'ステージ定義の徹底と、停滞案件の早期検知の仕組み化で予測精度が上がります。',
+        sfdc: '入力の自動化・半自動化を進め、ダッシュボードを日々の意思決定の起点にしましょう。',
+
+        model: '役割分担と型のドキュメント化を進め、新人でも再現できる状態を目指します。',
+      };
+      return { key: d.key, label: d.label, service: d.service, avg, pct, levelLabel: lvl.label, levelColor: lvl.color, advice: adviceMap[d.key] };
+    });
+
+    const overallAvg = domainResults.reduce((s, d) => s + d.avg, 0) / (domainResults.length || 1);
+    const overallLevel = levelOf(overallAvg);
+
+    const weakDomains = domainResults.slice().sort((a, b) => a.avg - b.avg).slice(0, 2);
+
+    const whitepaperList = WHITEPAPERS.map((w) => ({
+      title: w.title,
+      flagshipStyle: w.flagship ? 'border-color:var(--accent);background:#fff7f4' : '',
+    }));
+
+    const questions = FLAT.map((fq, i) => ({
+      idx: i,
+      isCurrent: i === qIndex,
+      q: fq.q,
+      options: fq.options.map((text, oi) => ({
+        text,
+        letter: LETTERS[oi],
+        select: () => this.selectOption(oi),
+      })),
+    }));
+
+    return {
+      isIntro: screen === 'intro',
+      isQuiz: screen === 'quiz',
+      isGate: screen === 'gate',
+      isResult: screen === 'result',
+      domainSummaries: DOMAINS.map((d, i) => ({ label: d.label, n: i + 1 })),
+      startQuiz: this.startQuiz,
+      currentQ,
+      questions,
+      qIndex,
+      progressLabel: `Q${qIndex + 1} / ${FLAT.length}`,
+      progressPct: Math.round(((qIndex) / FLAT.length) * 100),
+      hasPrev: qIndex > 0,
+      prevQuestion: this.prevQuestion,
+      onGateSubmit: this.onGateSubmit,
+      domainResults,
+      overallLevel,
+      weakDomains,
+      whitepaperList,
+      restart: this.restart,
+    };
+  }
+}
+</script>
+</body>
+</html>
