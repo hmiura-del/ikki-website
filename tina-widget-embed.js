@@ -96,6 +96,15 @@
         isMinimized = min;
         card.style.display = min ? "none" : "block";
         minimizedButton.style.display = min ? "flex" : "none";
+        if (!min) {
+            // カードを開いた瞬間にiframeへフォーカスしておくことで、
+            // 「1回目のクリックがフォーカス合わせだけで終わる」問題を防ぐ
+            setTimeout(function () {
+                try {
+                    iframe.contentWindow.focus();
+                } catch (e) {}
+            }, 50);
+        }
     }
 
     collapseBtn.addEventListener("click", function () {
@@ -104,6 +113,13 @@
     minimizedButton.addEventListener("click", function () {
         setMinimized(false);
     });
+
+    // ページを開いた瞬間から、iframeにあらかじめフォーカスしておく
+    setTimeout(function () {
+        try {
+            iframe.contentWindow.focus();
+        } catch (e) {}
+    }, 300);
 
     function getOrCreateVisitorId() {
         var STORAGE_KEY = "tina_visitor_id";
