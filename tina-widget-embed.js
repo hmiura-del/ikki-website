@@ -20,8 +20,7 @@
         "overflow:hidden",
         "box-shadow:0 8px 28px rgba(0,0,0,0.28)",
         "background:#0d1526",
-        "transition:transform 0.25s ease, opacity 0.25s ease",
-        "transform-origin:bottom right",
+        "display:block",
     ].join(";");
 
     var iframe = document.createElement("iframe");
@@ -47,19 +46,12 @@
         "font-size:14px",
         "font-weight:bold",
         "white-space:nowrap",
-        "display:flex",
+        "display:none",
         "align-items:center",
         "justify-content:center",
         "gap:8px",
-        "transition:transform 0.15s ease",
     ].join(";");
     minimizedButton.innerHTML = '<span style="font-size:16px;">\uD83D\uDCAC</span><span>AI秘書ティナと会話する</span>';
-    minimizedButton.addEventListener("mouseenter", function () {
-        minimizedButton.style.transform = "scale(1.06)";
-    });
-    minimizedButton.addEventListener("mouseleave", function () {
-        minimizedButton.style.transform = "scale(1)";
-    });
 
     var collapseBtn = document.createElement("button");
     collapseBtn.setAttribute("aria-label", "たたむ");
@@ -92,17 +84,12 @@
     document.body.appendChild(card);
     document.body.appendChild(minimizedButton);
 
-    // 最初はティナのカードを開いた状態、ボタンは隠す
-    setMinimized(false);
-
     function setMinimized(min) {
         isMinimized = min;
         card.style.display = min ? "none" : "block";
         minimizedButton.style.display = min ? "flex" : "none";
     }
 
-    // "click"だと、iframeにフォーカスが移る影響で1回目が反応しないことがあるため
-    // "mousedown"を使う(こちらはフォーカス移動の影響を受けにくい)
     collapseBtn.addEventListener("mousedown", function (e) {
         e.preventDefault();
         setMinimized(true);
