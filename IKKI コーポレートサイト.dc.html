@@ -125,7 +125,9 @@
     <div class="h-bg" style="position:absolute;inset:0;z-index:0;overflow:hidden;background:#0a1424">
       <video src="assets/hero.mp4" poster="assets/hero.png" autoplay muted playsinline preload="auto" aria-hidden="true" style="position:absolute;top:-16%;left:-16%;width:132%;height:132%;object-fit:cover"></video>
     </div>
-    <img data-hero-still src="assets/hero.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;transition:opacity .9s ease">
+    <div data-hero-still style="position:absolute;inset:0;z-index:0;overflow:hidden;opacity:0;transition:opacity .9s ease">
+      <img src="assets/hero.png" alt="" style="position:absolute;top:-16%;left:-16%;width:132%;height:132%;object-fit:cover">
+    </div>
     <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(100deg, rgba(10,20,36,.94) 0%, rgba(10,20,36,.86) 32%, rgba(10,20,36,.55) 58%, rgba(10,20,36,.28) 100%)"></div>
     <div style="position:relative;z-index:2;max-width:1320px;margin:0 auto;padding:clamp(64px,10vw,128px) 24px clamp(72px,11vw,140px)" class="hero-inner">
       <div style="max-width:640px">
@@ -870,7 +872,13 @@ class Component extends DCLogic {
     const still = scope.querySelector('[data-hero-still]');
     if (!el) return;
     // 音声は常にオフ（属性だけでは残らないため毎回強制）
-    const silence = () => { el.muted = true; el.defaultMuted = true; el.volume = 0; };
+    const silence = () => {
+      el.muted = true; el.defaultMuted = true; el.volume = 0;
+      el.setAttribute('muted', '');
+      // 音声トラック自体を無効化（対応ブラウザのみ）
+      const at = el.audioTracks;
+      if (at) { for (let i = 0; i < at.length; i++) { at[i].enabled = false; } }
+    };
     silence();
     el.addEventListener('play', silence);
     el.addEventListener('volumechange', silence);
