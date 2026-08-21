@@ -705,7 +705,7 @@ class Component extends DCLogic {
     data.append('_subject', 'IKKIサイト お問い合わせ');
     data.append('_template', 'table');
     fetch(this.FORM_ENDPOINT, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
-      .then((r) => { if (r.ok) { onDone(); } else { alert('送信に失敗しました。お手数ですが時間をおいて再度お試しください。'); } })
+      .then((r) => { if (r.ok) { if (window.gtag) window.gtag('event', 'generate_lead', { form_type: data.get('お問い合わせ種別') || data.get('お問い合わせ内容') || 'contact_form' }); onDone(); } else { alert('送信に失敗しました。お手数ですが時間をおいて再度お試しください。'); } })
       .catch(() => alert('送信に失敗しました。通信環境をご確認のうえ、再度お試しください。'));
   }
 
@@ -946,6 +946,19 @@ class Component extends DCLogic {
     };
   }
 }
+</script>
+<script>
+  // GA4: 資料ダウンロード(ホワイトペーパーPDF)のクリック計測
+  // テンプレートエンジンに手を加えず、イベント委譲で計測する安全な方式
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href*="assets/whitepapers/"]');
+    if (link && window.gtag) {
+      window.gtag('event', 'file_download', {
+        file_name: link.getAttribute('href'),
+        link_text: (link.textContent || '').trim().slice(0, 100)
+      });
+    }
+  });
 </script>
 </body>
 </html>
